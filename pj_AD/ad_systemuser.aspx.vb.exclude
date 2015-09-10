@@ -1,0 +1,344 @@
+Imports System
+Imports System.Data
+Imports System.Data.OleDb
+'Imports IAS.Core.CSCode
+
+Partial Class ad_systemuser
+    Inherits System.Web.UI.Page
+    Dim mlOBJGS As New IASClass.ucmGeneralSystem
+    Dim mlOBJGF As New IASClass.ucmGeneralFunction
+
+    Dim mlREADER As OleDb.OleDbDataReader
+    Dim mlSQL As String
+    Dim mlREADER2 As OleDb.OleDbDataReader
+    Dim mlSQL2 As String
+
+    Dim mlKEY As String
+    Dim mlRECORDSTATUS As String
+    Dim mlENCRYPTCODE As String
+
+    'Dim oMDBF As New IAS.Core.CSCode.ModuleDBFunction
+
+
+
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        mlTITLE.Text = "User Maintenance V2.05"
+        Me.Title = System.Configuration.ConfigurationManager.AppSettings("mgTITLE") & "User Maintenance V2.05"
+        mlENCRYPTCODE = System.Configuration.ConfigurationManager.AppSettings("mgENCRYPTCODE")
+        mlOBJGS.Main()
+        If mlOBJGS.ValidateExpiredDate() = True Then
+            Exit Sub
+        End If
+        If Session("mgACTIVECOMPANY") = "" Then Session("mgACTIVECOMPANY") = mlOBJGS.mgCOMPANYDEFAULT
+        mlOBJGS.mgACTIVECOMPANY = Session("mgACTIVECOMPANY")
+
+        If Page.IsPostBack = False Then
+            DisableCancel()
+            RetrieveFieldsDetail()
+            mlOBJGS.XM_UserLog(Session("mgUSERID"), Session("mgNAME"), "ad_systemuser", "System User", "")
+        Else
+        End If
+    End Sub
+
+    Protected Sub mlDATAGRID_ItemCommand(ByVal source As Object, ByVal e As System.Web.UI.WebControls.DataGridCommandEventArgs) Handles mlDATAGRID.ItemCommand
+        mlKEY = e.CommandArgument
+        Select Case e.CommandName
+            Case "BrowseRecord"
+                mlMESSAGE.Text = "Update Request for " & e.CommandArgument
+                RetrieveFields()
+                pnFILL.Visible = True
+            Case "EditRecord"
+                mlMESSAGE.Text = "Edit Request for  " & e.CommandArgument
+                mlSYSCODE.Value = "edit"
+                EditRecord()
+            Case "DeleteRecord"
+                mlMESSAGE.Text = "Delete Request for  " & e.CommandArgument
+                mlSYSCODE.Value = "delete"
+                DeleteRecord()
+            Case Else
+                ' Ignore Other
+        End Select
+    End Sub
+
+    Protected Sub btNewRecord_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btNewRecord.Click
+        NewRecord()
+    End Sub
+
+    Protected Sub btSaveRecord_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btSaveRecord.Click
+        If pnFILL.Visible = True Then
+            SaveRecord()
+        End If
+    End Sub
+
+    Protected Sub btCancelOperation_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btCancelOperation.Click
+        DisableCancel()
+    End Sub
+
+    Public Sub RetrieveFields()
+        DisableCancel()
+
+        'Dim dsData As New DataSet
+        'mlSQL = "SELECT * FROM AD_USERPROFILE WHERE UserID = '" & Trim(mlKEY) & "'"
+        'dsData = oMDBF.OpenRecordSet(mlSQL, "AD", "AD")
+
+        mlSQL = "SELECT * FROM AD_USERPROFILE WHERE UserID = '" & Trim(mlKEY) & "'"
+        mlREADER = mlOBJGS.DbRecordset(mlSQL, "AD", "AD")
+        If mlREADER.HasRows Then
+            mlREADER.Read()
+
+            mlUSERID.Text = Trim(mlREADER("UserID")) & ""
+            mlPASSWORD.Text = Trim(mlREADER("Password")) & ""
+            mlREPASSWORD.Text = Trim(mlREADER("Password")) & ""
+            mlPASSWORDH.Text = Trim(mlREADER("Password")) & ""
+            mlNAMA.Text = Trim(mlREADER("Name")) & ""
+
+            Try
+                mlGROUPSYS.SelectedValue = mlREADER("UserLevel")
+            Catch ex As Exception
+                mlGROUPSYS.Items.Add(mlREADER("UserLevel"))
+                mlGROUPSYS.SelectedValue = mlREADER("UserLevel")
+            End Try
+
+            Try
+                mlGROUPMENU.SelectedValue = mlREADER("GroupID")
+            Catch ex As Exception
+                mlGROUPMENU.Items.Add(mlREADER("GroupID"))
+                mlGROUPMENU.SelectedValue = mlREADER("GroupID")
+            End Try
+
+            Try
+                mlDEPT.SelectedValue = mlREADER("DeptID")
+            Catch ex As Exception
+                mlDEPT.Items.Add(mlREADER("DeptID"))
+                mlDEPT.SelectedValue = mlREADER("DeptID")
+            End Try
+
+
+            Try
+                mlSTATUS.SelectedValue = mlREADER("UserStatus")
+            Catch ex As Exception
+                mlSTATUS.Items.Add(mlREADER("UserStatus"))
+                mlSTATUS.SelectedValue = mlREADER("UserStatus")
+            End Try
+
+
+
+            mlMOBILENO.Text = Trim(mlREADER("TelHP")) & ""
+            mlEMAIL.Text = Trim(mlREADER("EmailAddr")) & ""
+            mlSTAFFID.Text = Trim(mlREADER("EmployeeID")) & ""
+            mlABSTAINID.Text = Trim(mlREADER("FingerPrintID")) & ""
+            mlAPPLICATIONID.Text = Trim(mlREADER("ApplicationID")) & ""
+        End If
+        mlOBJGS.CloseFile(mlREADER)
+    End Sub
+
+    Sub RetrieveFieldsDetail()
+        mlSQL2 = "SELECT * FROM AD_USERPROFILE ORDER BY UserID"
+        mlREADER2 = mlOBJGS.DbRecordset(mlSQL2, "AD", "AD")
+        mlDATAGRID.DataSource = mlREADER2
+        mlDATAGRID.DataBind()
+
+        mlOBJGS.CloseFile(mlREADER2)
+    End Sub
+
+    Sub DeleteRecord()
+        mlRECORDSTATUS = "Delete"
+        mlSQL = mlSQL & AD_UserProfile_ToLog(mlUSERID.Text, "Delete", Session("mgUSERID"))
+        mlSQL = mlSQL & "DELETE FROM AD_USERPROFILE WHERE UserID= '" & mlKEY & "';"
+        mlOBJGS.ExecuteQuery(mlSQL, "AD", "AD")
+        RetrieveFields()
+        RetrieveFieldsDetail()
+    End Sub
+
+    Sub NewRecord()
+        mlOBJGS.mgNEW = True
+        mlOBJGS.mgEDIT = False
+        EnableCancel()
+        ClearFields()
+        LoadComboData()
+        mlUSERID.Enabled = True
+        mlPASSWORD.Enabled = True
+        mlREPASSWORD.Enabled = True
+    End Sub
+
+    Sub EditRecord()
+        mlOBJGS.mgNEW = False
+        mlOBJGS.mgEDIT = True
+        ClearFields()
+        LoadComboData()
+        RetrieveFields()
+        EnableCancel()
+    End Sub
+
+
+
+    Private Sub EnableCancel()
+        btNewRecord.Visible = False
+        btSaveRecord.Visible = True
+        pnFILL.Visible = True
+        mlPASSWORDH.Visible = False
+
+        mlUSERID.Enabled = False
+        mlPASSWORD.Enabled = False
+        mlREPASSWORD.Enabled = False
+        mlNAMA.Enabled = True
+        mlGROUPSYS.Enabled = True
+        mlGROUPMENU.Enabled = True
+        mlDEPT.Enabled = True
+        mlSTATUS.Enabled = True
+        mlMOBILENO.Enabled = True
+        mlEMAIL.Enabled = True
+        mlSTAFFID.Enabled = True
+        mlABSTAINID.Enabled = True
+        mlAPPLICATIONID.Enabled = True
+    End Sub
+
+    Private Sub DisableCancel()
+        btNewRecord.Visible = True
+        btSaveRecord.Visible = False
+        pnFILL.Visible = False
+        mlPASSWORDH.Visible = False
+
+
+        mlUSERID.Enabled = False
+        mlPASSWORD.Enabled = False
+        mlREPASSWORD.Enabled = False
+        mlNAMA.Enabled = False
+        mlGROUPSYS.Enabled = False
+        mlGROUPMENU.Enabled = False
+        mlDEPT.Enabled = False
+        mlSTATUS.Enabled = False
+        mlMOBILENO.Enabled = False
+        mlEMAIL.Enabled = False
+        mlSTAFFID.Enabled = False
+        mlABSTAINID.Enabled = False
+        mlAPPLICATIONID.Enabled = False
+    End Sub
+
+    Sub ClearFields()
+        mlGROUPSYS.Items.Clear()
+        mlGROUPMENU.Items.Clear()
+        mlDEPT.Items.Clear()
+        mlSTATUS.Items.Clear()
+
+        mlUSERID.Text = ""
+        mlPASSWORD.Text = ""
+        mlREPASSWORD.Text = ""
+        mlNAMA.Text = ""
+        mlGROUPSYS.Text = ""
+        mlGROUPMENU.Text = ""
+        mlDEPT.Text = ""
+        mlSTATUS.Text = ""
+        mlMOBILENO.Text = ""
+        mlEMAIL.Text = ""
+        mlSTAFFID.Text = ""
+        mlABSTAINID.Text = ""
+        mlAPPLICATIONID.Text = ""
+    End Sub
+
+
+    Sub LoadComboData()
+        mlSQL = "SELECT * FROM AD_UNIVERSALLOOKUPLIN WHERE UniversalID='UserType'"
+        mlREADER = mlOBJGS.DbRecordset(mlSQL, "AD", "AD")
+        While mlREADER.Read
+            mlGROUPSYS.Items.Add(Trim(mlREADER("LinCode")) & "-" & mlREADER("Description"))
+        End While
+
+        mlSQL = "SELECT Distinct GroupMenu, Description FROM AD_GROUPMENU ORDER BY GroupMenu"
+        mlREADER = mlOBJGS.DbRecordset(mlSQL, "AD", "AD")
+        While mlREADER.Read
+            mlGROUPMENU.Items.Add(mlREADER("GroupMenu"))
+        End While
+
+        mlSQL = "SELECT * FROM AD_UNIVERSALLOOKUPLIN WHERE UniversalID='INTERNDEPT'"
+        mlREADER = mlOBJGS.DbRecordset(mlSQL, "AD", "AD")
+        While mlREADER.Read
+            mlDEPT.Items.Add(Trim(mlREADER("LinCode")) & "-" & mlREADER("Description"))
+        End While
+
+        mlSQL = "SELECT * FROM AD_UNIVERSALLOOKUPLIN WHERE UniversalID='USERSTATUS'"
+        mlREADER = mlOBJGS.DbRecordset(mlSQL, "AD", "AD")
+        While mlREADER.Read
+            mlSTATUS.Items.Add(Trim(mlREADER("LinCode")) & "-" & mlREADER("Description"))
+        End While
+
+        mlOBJGS.CloseFile(mlREADER)
+    End Sub
+
+    Sub SaveRecord()
+        Dim mlKEY As String
+        Dim mgUSERID As String
+        Dim mlGROUPSYS2 As String
+        Dim mlDEPT2 As String
+        Dim mlSTATUS2 As String
+
+        Dim mlMENUSTYLE As String
+        Dim mlCOMPANY As String
+        Dim mlSYSTEM As String
+
+
+        mgUSERID = Session("mgUSERID")
+        mlGROUPSYS2 = Trim(mlOBJGF.GetStringAtPosition(mlGROUPSYS.Text, 0, "-"))
+        mlDEPT2 = Trim(mlOBJGF.GetStringAtPosition(mlGROUPSYS.Text, 0, "-"))
+        mlSTATUS2 = Trim(mlOBJGF.GetStringAtPosition(mlGROUPSYS.Text, 0, "-"))
+
+        mlKEY = Trim(mlUSERID.Text)
+        If mlOBJGS.mgNEW Then
+            mlMENUSTYLE = mlOBJGS.FindSetup("AD_ADSETUP", "MenuStyleDefault", "AD", "AD")
+            mlCOMPANY = mlOBJGS.FindSetup("AD_ADSETUP", "CompanyDefault", "AD", "AD")
+            mlSYSTEM = mlOBJGS.FindSetup("AD_ADSETUP", "SystemDefault", "AD", "AD")
+        Else
+            mlMENUSTYLE = mlOBJGS.FindSetup("AD_ADSETUP", "MenuStyleDefault", "AD", "AD")
+            mlCOMPANY = mlOBJGS.mgACTIVECOMPANY
+            mlSYSTEM = mlOBJGS.mgACTIVESYSTEM
+        End If
+
+
+        Dim mlPASSWORDSAVE As String = ""
+        If mlSYSCODE.Value = "edit" Then
+            mlPASSWORDSAVE = mlPASSWORDH.Text
+        Else
+            mlPASSWORDSAVE = mlOBJGF.Encrypt(Trim(mlPASSWORD.Text), mlENCRYPTCODE)
+        End If
+
+
+        mlSQL = mlSQL & AD_UserProfile_ToLog(mlKEY, "New", Session("mgUSERID"))
+        mlSQL = mlSQL & "DELETE FROM AD_USERPROFILE WHERE UserID= '" & mlKEY & "'"
+        mlOBJGS.ExecuteQuery(mlSQL, "AD", "AD")
+        mlSQL = ""
+
+        mlSQL = "INSERT INTO AD_USERPROFILE (UserID,Password,Name,UserLevel,GroupID,DeptID,MenuStyle,LastCompany,LastSystem," & _
+                  " UserStatus,TelHP,EmailAddr,EmployeeID,FingerPrintID,ApplicationID,RecordStatus,RecUserID,RecDate)" & _
+                  " VALUES ('" & Trim(mlUSERID.Text) & "', '" & mlPASSWORDSAVE & "'," & _
+                  " '" & Trim(mlNAMA.Text) & "', '" & Trim(mlGROUPSYS2) & "', '" & Trim(mlGROUPMENU.Text) & "', '" & Trim(mlDEPT2) & "'," & _
+                  " '" & mlMENUSTYLE & "', '" & mlCOMPANY & "', '" & mlSYSTEM & "'," & _
+                  " '" & Trim(mlSTATUS2) & "','" & Trim(mlMOBILENO.Text) & "','" & Trim(mlEMAIL.Text) & "','" & Trim(mlSTAFFID.Text) & "'," & _
+                  " '" & Trim(mlABSTAINID.Text) & "','" & Trim(mlAPPLICATIONID.Text) & "'," & _
+                  " 'New','" & Session("mgUSERID") & "','" & mlOBJGF.FormatDate(Now) & "');"
+        mlOBJGS.ExecuteQuery(mlSQL, "AD", "AD")
+
+
+        mlOBJGS.mgNEW = False
+        mlOBJGS.mgEDIT = False
+        DisableCancel()
+        RetrieveFieldsDetail()
+    End Sub
+
+    Function AD_UserProfile_ToLog(ByVal mpKEY As String, ByVal mpSTATUS As String, ByVal mpUSERID As String) As String
+        Dim mlLOG As String
+        mlLOG = ""
+        mlLOG = mlLOG & " INSERT INTO AD_USERPROFILE_LOG (Linno,UserID,Name,Password,DateJoin,CompanyID,GroupID,DeptID,UserStatus," & _
+                " UserLevel,IsLogin,NumberLogin,MenuStyle,LastSystem,LastCompany,TelHP,EmailAddr,EmployeeID,FingerPrintID," & _
+                " ApplicationID,RecordStatus,RecUserID,RecDate,RecUDate)" & _
+                " SELECT Linno,UserID,Name,Password,DateJoin,CompanyID,GroupID,DeptID,UserStatus,UserLevel,IsLogin,NumberLogin," & _
+                " MenuStyle,LastSystem,LastCompany,TelHP,EmailAddr,EmployeeID,FingerPrintID,ApplicationID," & _
+                " '" & Trim(mpSTATUS) & "','" & Trim(mpUSERID) & "','" & mlOBJGF.FormatDate(Now) & "'," & _
+                " GETDATE() FROM AD_USERPROFILE WHERE UserID = '" & mpKEY & "';"
+        Return mlLOG
+    End Function
+
+
+
+   
+End Class

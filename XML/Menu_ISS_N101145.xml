@@ -1,0 +1,18 @@
+<?xml version='1.0'?>
+<MsMenu>
+<MsMenuItem title='IAS APPLICATION' url='#' result='SM' menuid='00000' ><MsMenuItem title='Administration' url='#' result='SM' menuid='AD000' ><MsMenuItem title='Ganti Password' url='../pj_ad/ad_updatepwd.aspx' result='MN' menuid='AD008' ></MsMenuItem>
+<MsMenuItem title='Change Menu Style' url='../pj_ad/ad_menustyle.aspx' result='MN' menuid='AD019' ></MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Account Receivable' url='#' result='SM' menuid='AR000' ><MsMenuItem title='Master' url='#' result='SM' menuid='APM02' ><MsMenuItem title='AR INV-Messanger' url='../pj_ar/ar_Messanger.aspx' result='MN' menuid='AR003' ></MsMenuItem>
+<MsMenuItem title='AR INV-Type Document lampiran' url='../pj_ar/ar_typedoc_lampiran.aspx' result='MN' menuid='AR004' ></MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Posting' url='#' result='SM' menuid='APP02' ></MsMenuItem>
+<MsMenuItem title='Report' url='#' result='SM' menuid='APR02' ><MsMenuItem title='AR INV-Monitoring' url='../pj_ar/ar_monitoring.aspx' result='MN' menuid='AR005' ></MsMenuItem>
+<MsMenuItem title='AR INV-Monitoring Messanger' url='../pj_ar/ar_monitoringmessanger.aspx' result='MN' menuid='AR006' ></MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Transaksi' url='#' result='SM' menuid='APT02' ><MsMenuItem title='AR INV-Invoice Delivery' url='../pj_ar/ar_invoicedelivery.aspx' result='MN' menuid='AR001' ></MsMenuItem>
+<MsMenuItem title='AR INV-Upload Worksheet' url='../pj_ar/ar_UploadWorksheet.aspx' result='MN' menuid='AR002' ></MsMenuItem>
+</MsMenuItem>
+</MsMenuItem>
+</MsMenuItem>
+</MsMenu>

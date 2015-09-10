@@ -1,0 +1,549 @@
+Imports System
+Imports System.Data
+Imports System.Data.OleDb
+
+
+Partial Class ct_ctentry2
+    Inherits System.Web.UI.Page
+
+    Dim mlOBJGS As New IASClass.ucmGeneralSystem
+    Dim mlOBJGF As New IASClass.ucmGeneralFunction
+    Dim mlOBJPJ As New FunctionLocal
+
+    Dim mlREADER As OleDb.OleDbDataReader
+    Dim mlSQL As String
+    Dim mlREADER2 As OleDb.OleDbDataReader
+    Dim mlSQL2 As String
+    Dim mlRSTEMP As OleDb.OleDbDataReader
+    Dim mlSQLTEMP As String
+    Dim mlKEY As String
+    Dim mlRECORDSTATUS As String
+    Dim mlSPTYPE As String
+    Dim mlFUNCTIONPARAMETER As String
+    Dim mlI As Integer
+    Dim mlCURRENTDATE As String = DateTime.Now.Day.ToString("00") + "/" + DateTime.Now.Month.ToString("00") + "/" + DateTime.Now.Year.ToString()
+
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        mlTITLE.Text = "Contract Maintenance V2.00"
+        Me.Title = System.Configuration.ConfigurationManager.AppSettings("mgTITLE") & "Contract Maintenance V2.00"
+        mlOBJGS.Main()
+        If mlOBJGS.ValidateExpiredDate() = True Then
+            Exit Sub
+        End If
+        If Session("mgACTIVECOMPANY") = "" Then Session("mgACTIVECOMPANY") = mlOBJGS.mgCOMPANYDEFAULT
+        mlOBJGS.mgACTIVECOMPANY = Session("mgACTIVECOMPANY")
+
+        mlFUNCTIONPARAMETER = Trim(Request("mpFP"))
+        Select Case mlFUNCTIONPARAMETER
+            Case "1" 'Normal
+                tr1.Visible = False
+                tr2.Visible = False
+                tr3.Visible = False
+                tr4.Visible = False
+                lbUSER.Text = "Sales"
+                lbPRICE.Text = "Price"
+
+            Case "2" 'Existing Regional
+                tr1.Visible = True
+                tr2.Visible = True
+                tr3.Visible = True
+                tr4.Visible = True
+                lbUSER.Text = "Negotiator"
+                lbPRICE.Text = "Approved Price"
+
+            Case "3" 'Existing Branch
+                tr1.Visible = True
+                tr2.Visible = True
+                tr3.Visible = True
+                tr4.Visible = True
+                lbUSER.Text = "Negotiator"
+                lbPRICE.Text = "Approved Price"
+
+        End Select
+
+
+        If Page.IsPostBack = False Then
+            mlOBJGS.XM_UserLog(Session("mgUSERID"), Session("mgNAME"), "", "", "")
+            pnSEARCHSITECARD.Visible = False
+            pnSEARCHCUST.Visible = False
+            pnSEARCHUSERID.Visible = False
+            pnSEARCHBRANCH.Visible = False
+        Else
+        End If
+    End Sub
+
+    Protected Sub mlDATAGRID_ItemCommand(ByVal source As Object, ByVal e As System.Web.UI.WebControls.DataGridCommandEventArgs) Handles mlDATAGRID.ItemCommand
+        mlKEY = e.CommandArgument
+        Select Case e.CommandName
+            Case "BrowseRecord"
+                mlMESSAGE.Text = "Update Request for " & e.CommandArgument
+                RetrieveFields()
+                pnFILL.Visible = True
+            Case "EditRecord"
+                mlMESSAGE.Text = "Edit Request for  " & e.CommandArgument
+                mlSYSCODE.Value = "edit"
+                EditRecord()
+            Case "DeleteRecord"
+                mlMESSAGE.Text = "Delete Request for  " & e.CommandArgument
+                mlSYSCODE.Value = "delete"
+                DeleteRecord()
+            Case Else
+                ' Ignore Other
+        End Select
+    End Sub
+
+    Protected Sub btNewRecord_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btNewRecord.Click
+        NewRecord()
+    End Sub
+
+    Protected Sub btSaveRecord_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btSaveRecord.Click
+        If pnFILL.Visible = True Then
+            SaveRecord()
+        End If
+    End Sub
+
+    Protected Sub btCancelOperation_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btCancelOperation.Click
+        DisableCancel()
+    End Sub
+
+    ''
+
+    Protected Sub btUSERID_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btUSERID.Click
+        If mlOBJGF.IsNone(Trim(txUSERID.Text)) = False Then
+            txUSERDESC.Text = mlOBJGS.ADGeneralLostFocus("USER", Trim(txUSERID.Text))
+        End If
+    End Sub
+
+    Protected Sub btSEARCHUSERID_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btSEARCHUSERID.Click
+        If pnSEARCHUSERID.Visible = False Then
+            pnSEARCHUSERID.Visible = True
+        Else
+            pnSEARCHUSERID.Visible = False
+        End If
+    End Sub
+
+    Protected Sub btSEARCHUSERIDSUBMIT_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btSEARCHUSERIDSUBMIT.Click
+        If mlOBJGF.IsNone(mpSEARCHUSERID.Text) = False Then SearchUser(1, mpSEARCHUSERID.Text)
+    End Sub
+
+    Protected Sub mlDATAGRIDUSERID_ItemCommand(ByVal source As Object, ByVal e As System.Web.UI.WebControls.DataGridCommandEventArgs) Handles mlDATAGRIDUSERID.ItemCommand
+        Try
+            txUSERID.Text = CType(e.Item.Cells(0).Controls(0), LinkButton).Text
+            txUSERDESC.Text = CType(e.Item.Cells(1).Controls(0), LinkButton).Text
+            mlDATAGRIDUSERID.DataSource = Nothing
+            mlDATAGRIDUSERID.DataBind()
+            pnSEARCHUSERID.Visible = False
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Sub SearchUser(ByVal mpTYPE As Byte, ByVal mpNAME As String)
+        Try
+            Select Case mpTYPE
+                Case "1"
+                    mlSQLTEMP = "SELECT UserID, Name FROM AD_USERPROFILE WHERE Name LIKE  '%" & mpNAME & "%'"
+                    mlRSTEMP = mlOBJGS.DbRecordset(mlSQLTEMP, "AD", "AD")
+                    mlDATAGRIDUSERID.DataSource = mlRSTEMP
+                    mlDATAGRIDUSERID.DataBind()
+            End Select
+        Catch ex As Exception
+        End Try
+    End Sub
+
+
+    ''
+    Protected Sub btSEARCHSITECARD_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btSEARCHSITECARD.Click
+        If pnSEARCHSITECARD.Visible = False Then
+            pnSEARCHSITECARD.Visible = True
+        Else
+            pnSEARCHSITECARD.Visible = False
+        End If
+    End Sub
+
+
+    Protected Sub btSEARCHSITECARDSUBMIT_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btSEARCHSITECARDSUBMIT.Click
+        If mlOBJGF.IsNone(mlSEARCHSITECARD.Text) = False Then SearchSiteCard(1, mlSEARCHSITECARD.Text)
+    End Sub
+
+    Protected Sub mlDATAGRIDSITECARD_ItemCommand(ByVal source As Object, ByVal e As System.Web.UI.WebControls.DataGridCommandEventArgs) Handles mlDATAGRIDSITECARD.ItemCommand
+        Try
+            mpSITECARD.Text = CType(e.Item.Cells(0).Controls(0), LinkButton).Text
+            mpSITEDESC.Text = CType(e.Item.Cells(1).Controls(0), LinkButton).Text
+            mlDATAGRIDSITECARD.DataSource = Nothing
+            mlDATAGRIDSITECARD.DataBind()
+            pnSEARCHSITECARD.Visible = False
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Sub SearchSiteCard(ByVal mpTYPE As Byte, ByVal mpNAME As String)
+        Select Case mpTYPE
+            Case "1"
+                mlSQLTEMP = "SELECT LineNo_,SearchName FROM [ISS Servisystem, PT$CustServiceSite] WHERE SearchName LIKE  '%" & mlSEARCHSITECARD.Text & "%'"
+                mlRSTEMP = mlOBJGS.DbRecordset(mlSQLTEMP, "PB", "ISSN3")
+                mlDATAGRIDSITECARD.DataSource = mlRSTEMP
+                mlDATAGRIDSITECARD.DataBind()
+        End Select
+    End Sub
+
+    Protected Sub btSITECARD_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btSITECARD.Click
+        mpSITEDESC.Text = mlOBJPJ.ISS_XMGeneralLostFocus("SITECARD_DESC", Trim(mpSITECARD.Text))
+    End Sub
+
+    ''
+    Protected Sub btSEARCHCUST_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btSEARCHCUST.Click
+        If pnSEARCHCUST.Visible = False Then
+            pnSEARCHCUST.Visible = True
+        Else
+            pnSEARCHCUST.Visible = False
+        End If
+    End Sub
+
+
+    Protected Sub btSEARCHCUSTSUBMIT_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btSEARCHCUSTSUBMIT.Click
+        If mlOBJGF.IsNone(mlSEARCHCUST.Text) = False Then SearchCUST(1, mlSEARCHCUST.Text)
+    End Sub
+
+    Protected Sub mlDATAGRIDCUST_ItemCommand(ByVal source As Object, ByVal e As System.Web.UI.WebControls.DataGridCommandEventArgs) Handles mlDATAGRIDCUST.ItemCommand
+        Try
+            txCUST.Text = CType(e.Item.Cells(0).Controls(0), LinkButton).Text
+            mpSITEDESC.Text = CType(e.Item.Cells(1).Controls(0), LinkButton).Text
+            mlDATAGRIDCUST.DataSource = Nothing
+            mlDATAGRIDCUST.DataBind()
+            pnSEARCHCUST.Visible = False
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Sub SearchCUST(ByVal mpTYPE As Byte, ByVal mpNAME As String)
+        Select Case mpTYPE
+            Case "1"
+                mlSQLTEMP = "SELECT LineNo_,SearchName FROM [ISS Servisystem, PT$CustServiceSite] WHERE SearchName LIKE  '%" & mlSEARCHCUST.Text & "%'"
+                mlRSTEMP = mlOBJGS.DbRecordset(mlSQLTEMP, "PB", "ISSN3")
+                mlDATAGRIDCUST.DataSource = mlRSTEMP
+                mlDATAGRIDCUST.DataBind()
+        End Select
+    End Sub
+
+    Protected Sub btCUST_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btCUST.Click
+        mpSITEDESC.Text = mlOBJPJ.ISS_XMGeneralLostFocus("CUST_DESC", Trim(txCUST.Text))
+    End Sub
+
+    Sub SearchRecord()
+        Dim mlSQL As String
+        Dim mlFUNCTIONPARAMETER2 As String
+
+        If pnFILL.Visible = False Then
+            ClearFields()
+            EnableCancel()
+            pnFILL.Visible = True
+            Exit Sub
+        End If
+
+        Try
+            mlSQL = ""
+
+            If mlOBJGF.IsNone(mlSQL) = False Then
+                Try
+                    mlSQL2 = "SELECT "
+                    RetrieveFieldsDetail(mlSQL)
+                Catch ex As Exception
+                End Try
+            End If
+
+
+        Catch ex As Exception
+        End Try
+    End Sub
+
+    Protected Sub btSearchRecord_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btSearchRecord.Click
+        SearchRecord()
+    End Sub
+
+
+    Public Sub RetrieveFields()
+        DisableCancel()
+
+        mlSQL = "SELECT * FROM WHERE DocNo = '" & Trim(mlKEY) & "'"
+        mlREADER = mlOBJGS.DbRecordset(mlSQL)
+        If mlREADER.HasRows Then
+            mlREADER.Read()
+            txDOCUMENTNO.Text = mlREADER("DocNo") & ""
+        End If
+    End Sub
+
+    Sub RetrieveFieldsDetail(ByVal mpSQL As String)
+        If mpSQL = "" Then
+            mlSQL2 = "SELECT * FROM " & _
+                " WHERE RecordStatus='New' ORDER BY DocNo"
+        Else
+            mpSQL = mlSQL2
+        End If
+        mlREADER2 = mlOBJGS.DbRecordset(mlSQL2)
+        mlDATAGRID.DataSource = mlREADER2
+        mlDATAGRID.DataBind()
+
+        mlOBJGS.CloseFile(mlREADER2)
+    End Sub
+
+
+    Sub DeleteRecord()
+        mlSPTYPE = "Delete"
+        Try
+            Sql_1(mlSPTYPE, mlKEY)
+        Catch ex As Exception
+        End Try
+
+        mlSYSCODE.Value = ""
+        RetrieveFields()
+    End Sub
+
+    Sub NewRecord()
+        mlOBJGS.mgNEW = True
+        mlOBJGS.mgEDIT = False
+        EnableCancel()
+        ClearFields()
+        LoadComboData()
+        txDOCUMENTNO.Text = "--AUTONUMBER--"
+        mlOBJPJ.SetTextBox(True, txDOCUMENTNO)
+    End Sub
+
+    Sub EditRecord()
+        mlOBJGS.mgNEW = False
+        mlOBJGS.mgEDIT = True
+        ClearFields()
+        LoadComboData()
+        RetrieveFields()
+        EnableCancel()
+    End Sub
+
+
+    Private Sub EnableCancel()
+        btNewRecord.Visible = False
+        btSaveRecord.Visible = True
+        pnFILL.Visible = True
+
+        mlOBJPJ.SetTextBox(False, txDOCUMENTNO)
+        mlOBJPJ.SetTextBox(False, txDOCDATE1)
+        mlOBJPJ.SetTextBox(False, txCUST)
+        mlOBJPJ.SetTextBox(False, mpSITECARD)
+        mlOBJPJ.SetTextBox(False, txADDR)
+        mlOBJPJ.SetTextBox(False, txCITY)
+        mlOBJPJ.SetTextBox(False, txZIP)
+        mlOBJPJ.SetTextBox(False, txPHONE1)
+        mlOBJPJ.SetTextBox(False, txPHONE1_PIC)
+        mlOBJPJ.SetTextBox(False, txCTDOCNO)
+        mlOBJPJ.SetTextBox(False, txDOCDATE2)
+        mlOBJPJ.SetTextBox(False, txREFFNO)
+        mlOBJPJ.SetTextBox(False, txCRDOCDATE1)
+        mlOBJPJ.SetTextBox(False, txCRDOCDATE2)
+        mlOBJPJ.SetTextBox(False, txMANPOWER)
+        mlOBJPJ.SetTextBox(False, txPERCENTAGE)
+        mlOBJPJ.SetTextBox(False, txPRICE2)
+        mlOBJPJ.SetTextBox(False, txPRICE)
+        mlOBJPJ.SetTextBox(False, txUSERID)
+        mlOBJPJ.SetTextBox(False, mpBRANCH)
+        mlOBJPJ.SetTextBox(False, txREMARKS)
+
+
+        btDOCDATE1.Visible = True
+        btSEARCHCUST.Visible = True
+        btCUST.Visible = True
+        btSEARCHSITECARD.Visible = True
+        btSITECARD.Visible = True
+        btCRDOCDATE1.Visible = True
+        btCRDOCDATE2.Visible = True
+        btPRODUCT.Visible = True
+        btSEARCHUSERID.Visible = True
+        btUSERID.Visible = True
+        btSEARCHBRANCH.Visible = True
+        btBRANCH.Visible = True
+    End Sub
+
+    Private Sub DisableCancel()
+        btNewRecord.Visible = True
+        btSaveRecord.Visible = False
+        pnFILL.Visible = False
+
+        mlOBJPJ.SetTextBox(True, txDOCUMENTNO)
+        mlOBJPJ.SetTextBox(True, txDOCDATE1)
+        mlOBJPJ.SetTextBox(True, txCUST)
+        mlOBJPJ.SetTextBox(True, mpSITECARD)
+        mlOBJPJ.SetTextBox(True, txADDR)
+        mlOBJPJ.SetTextBox(True, txCITY)
+        mlOBJPJ.SetTextBox(True, txZIP)
+        mlOBJPJ.SetTextBox(True, txPHONE1)
+        mlOBJPJ.SetTextBox(True, txPHONE1_PIC)
+        mlOBJPJ.SetTextBox(True, txCTDOCNO)
+        mlOBJPJ.SetTextBox(True, txDOCDATE2)
+        mlOBJPJ.SetTextBox(True, txREFFNO)
+        mlOBJPJ.SetTextBox(True, txCRDOCDATE1)
+        mlOBJPJ.SetTextBox(True, txCRDOCDATE2)
+        mlOBJPJ.SetTextBox(True, txMANPOWER)
+        mlOBJPJ.SetTextBox(True, txPERCENTAGE)
+        mlOBJPJ.SetTextBox(True, txPRICE2)
+        mlOBJPJ.SetTextBox(True, txPRICE)
+        mlOBJPJ.SetTextBox(True, txUSERID)
+        mlOBJPJ.SetTextBox(True, mpBRANCH)
+        mlOBJPJ.SetTextBox(True, txREMARKS)
+
+        btDOCDATE1.Visible = False
+        btSEARCHCUST.Visible = False
+        btCUST.Visible = False
+        btSEARCHSITECARD.Visible = False
+        btSITECARD.Visible = False
+        btCRDOCDATE1.Visible = False
+        btCRDOCDATE2.Visible = False
+        btPRODUCT.Visible = False
+        btSEARCHUSERID.Visible = False
+        btUSERID.Visible = False
+        btSEARCHBRANCH.Visible = False
+        btBRANCH.Visible = False
+
+    End Sub
+
+    Sub ClearFields()
+        txDOCUMENTNO.Text = ""
+        txDOCDATE1.Text = mlCURRENTDATE
+        txCUST.Text = ""
+        lbCUST.Text = ""
+        mpSITECARD.Text = ""
+        mpSITEDESC.Text = ""
+        txADDR.Text = ""
+        txCITY.Text = ""
+        txZIP.Text = ""
+        txPHONE1.Text = ""
+        txPHONE1_PIC.Text = ""
+        txCTDOCNO.Text = ""
+        txDOCDATE2.Text = ""
+        txREFFNO.Text = ""
+        txCRDOCDATE1.Text = mlCURRENTDATE
+        txCRDOCDATE2.Text = ""
+        lbPRODUCT.Text = ""
+        txMANPOWER.Text = ""
+        txPERCENTAGE.Text = ""
+        txPRICE2.Text = ""
+        txPRICE.Text = ""
+        txUSERID.Text = ""
+        mpBRANCH.Text = ""
+        lbBRANCH.Text = ""
+        txREMARKS.Text = ""
+
+        txFILEUPLOAD1_N.Text = ""
+        lnLINK1.Text = ""
+        txFILEUPLOAD2_N.Text = ""
+        lnLINK2.Text = ""
+        txFILEUPLOAD3_N.Text = ""
+        lnLINK3.Text = ""
+        txFILEUPLOAD4_N.Text = ""
+        lnLINK4.Text = ""
+        txFILEUPLOAD5_N.Text = ""
+        lnLINK5.Text = ""
+
+    End Sub
+
+
+    Sub LoadComboData()
+
+    End Sub
+
+    Sub SaveRecord()
+        Dim mlSQLHR As String = ""
+        Dim mlSQLDT As String = ""
+
+        mlOBJGS.mgMESSAGE = ValidateForm()
+        If mlOBJGF.IsNone(mlOBJGS.mgMESSAGE) = False Then
+            mlMESSAGE.Text = mlOBJGS.mgMESSAGE
+            Exit Sub
+        End If
+
+        mlSPTYPE = "New"
+        If mlSYSCODE.Value = "edit" Then
+            mlSPTYPE = "Edit"
+        End If
+
+        Try
+            mlKEY = Trim(txDOCUMENTNO.Text)
+            Sql_1(mlSPTYPE, mlKEY)
+        Catch ex As Exception
+        End Try
+
+        mlSYSCODE.Value = ""
+        ClearFields()
+        DisableCancel()
+    End Sub
+
+    Function ValidateForm() As String
+        ValidateForm = ""
+
+        If mlOBJGS.mgNEW = True Then
+
+        End If
+
+    End Function
+
+
+    Sub Sql_1(ByVal mpSTATUS As String, ByVal mpCODE As String)
+        Dim mlSTATUS As String
+        Dim mlNEWRECORD As Boolean
+
+        Try
+            mlNEWRECORD = False
+
+            Select Case mpSTATUS
+                Case "Edit", "Delete"
+                    mlSQL = ""
+                    mlSQL = mlSQL & mlOBJPJ.ISS_OP_UserSiteCard_ToLog(mlKEY, mpSTATUS, Session("mgUSERID"))
+            End Select
+
+            Select Case mpSTATUS
+                Case "New"
+                    mlNEWRECORD = True
+                    If txDOCUMENTNO.Text = "--AUTONUMBER--" Then
+                        mlKEY = mlOBJGS.GetModuleCounter("" & mlFUNCTIONPARAMETER, "00000000")
+                        txDOCUMENTNO.Text = mlKEY
+                    Else
+                        mlKEY = Trim(txDOCUMENTNO.Text)
+                    End If
+
+                Case "Edit"
+                    mlSTATUS = "Edit"
+                    mlNEWRECORD = True
+                    mlSQL = mlSQL & " DELETE FROM  WHERE DocNo = '" & mlKEY & "';"
+
+                Case "Delete"
+                    mlSTATUS = "Delete"
+                    mlSQL = mlSQL & " DELETE FROM  WHERE DocNo = '" & mlKEY & "';"
+            End Select
+            If mlOBJGF.IsNone(mlSQL) = False Then mlOBJGS.ExecuteQuery(mlSQL)
+            mlSQL = ""
+
+
+            mlI = 0
+            If mlNEWRECORD = True Then
+                mlSQL = ""
+                mlI = mlI + 1
+                mlSQL = mlSQL & " INSERT INTO " & _
+                            " RecordStatus,RecUserID,RecDate) VALUES ( " & _
+                            " '" & mlFUNCTIONPARAMETER & "','" & mlKEY & "','" & mlOBJGF.FormatDate(Now) & "'," & _
+                            " 'New','" & Session("mgUSERID") & "','" & mlOBJGF.FormatDate(Now) & "');"
+            End If
+
+            Select Case mpSTATUS
+                Case "New"
+                    mlSQL = mlSQL & mlOBJPJ.ISS_OP_UserSiteCard_ToLog(mlKEY, mpSTATUS, Session("mgUSERID"))
+            End Select
+            mlOBJGS.ExecuteQuery(mlSQL)
+            mlSQL = ""
+
+        Catch ex As Exception
+            mlOBJGS.XMtoLog("", "", "" & mlKEY, Err.Description, "New", Session("mgUSERID"), mlOBJGF.FormatDate(Now))
+        End Try
+    End Sub
+
+
+
+
+
+End Class

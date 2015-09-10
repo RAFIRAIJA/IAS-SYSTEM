@@ -1,0 +1,215 @@
+<%@ Page Language="VB" MasterPageFile="~/pagesetting/MsPageBlank.master" AutoEventWireup="false" CodeFile="ad_menu_old.aspx.vb" Inherits="ad_menu" title="Menu Maintenance V2.00" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="mpCONTENT" Runat="Server">
+    <form id="form1" runat="server">
+
+    <asp:Panel ID="pnTOOLBAR" runat="server" Width="100%">  
+    <table border="0" cellpadding="2" cellspacing="1" width="100%">
+        <tr>
+            <td>
+                <p><asp:Label ID="mlMESSAGE" runat="server" ForeColor="Purple" Font-Italic="true" Visible="false"></asp:Label></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p class="header1"><b><asp:Label id="mlTITLE" runat="server"></asp:Label></b></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <asp:HiddenField ID="mlSYSCODE" runat="server" Visible="false"/>
+            </td>
+        </tr>  
+        <tr>
+            <td><asp:ImageButton id="btNewRecord" ToolTip="NewRecord" ImageUrl="~/images/toolbar/new.jpg" runat="server" />&nbsp;
+                <asp:ImageButton id="btSaveRecord" ToolTip="SaveRecord" Visible="false" ImageUrl="~/images/toolbar/save.jpg" runat="server" OnClientClick="return confirm('Save Record ?');" />&nbsp;
+                <asp:ImageButton id="btSearchRecord" ToolTip="SearchRecord" ImageUrl="~/images/toolbar/find.jpg" runat="server" />&nbsp;
+                <asp:ImageButton id="btCancelOperation" ToolTip="CancelOperation" ImageUrl="~/images/toolbar/cancel.jpg" runat="server" />    
+            </td>
+        </tr>                      
+    </table>
+    <hr />
+    </asp:Panel>
+    <asp:Panel ID="pnlSearch" runat="server" Width="100%" Visible="false" >
+        <table runat="server" border="0" cellpadding="0" cellspacing="0" width="75%">
+            <tr>
+                <td width="10" height="20" class="tdtopikiri">&nbsp;</td>
+                <td align="center" class="tdtopi">SEARCH BY</td>
+                <td width="10" class="tdtopikanan">&nbsp;</td>
+            </tr>
+        </table>
+        <table runat="server" border="0" cellpadding="2" cellspacing="1" width="75%">
+            <tr>
+                <td class="tdganjil" width="17%">Search  By</td>
+                <td class="tdganjil" width="33%">
+                    <asp:DropDownList runat="server" ID="ddlSearchBy">
+                        <asp:ListItem Value="">Select One</asp:ListItem>                        
+                        <asp:ListItem Value="menuid">Menu ID</asp:ListItem>
+                        <asp:ListItem Value="desciption">Description</asp:ListItem>
+                    </asp:DropDownList>&nbsp;
+                    <asp:TextBox ID="txtSearchBy" runat="server" Width="200px" CssClass="inptype"></asp:TextBox>                    
+                </td>
+                <td class="tdganjil" colspan="2"></td> 
+            </tr>
+            <tr>
+                <td class="tdganjil" colspan="2" width="50%"></td>
+                <td class="tdganjil" align="right">
+                    <asp:ImageButton ID="btnSearch" runat="server" ImageUrl="../Images/button/buttonSearch.gif" />&nbsp;
+                    <asp:ImageButton ID="btnReset" runat="server" ImageUrl="../Images/button/buttonReset.gif" />
+                </td>
+                <td class="tdganjil" width="10%"></td>
+            </tr>
+        </table>
+        <hr />
+    </asp:Panel>
+<asp:Table id="mlTABLE1" BorderWidth ="0" CellPadding ="0" CellSpacing="0" Width="100%" runat="server">
+
+<%--    <asp:TableRow><asp:TableCell><p class="header1"><b><asp:Label id="mlTITLE" runat="server"></asp:Label></b></p></asp:TableCell></asp:TableRow>
+    <asp:TableRow><asp:TableCell><p><asp:Label ID="mlMESSAGE" runat="server" ForeColor="Purple" Font-Italic="true"></asp:Label></p></asp:TableCell></asp:TableRow>
+    <asp:TableRow><asp:TableCell><asp:HiddenField ID="mlSYSCODE" runat="server"/></asp:TableCell></asp:TableRow>
+--%>
+    <asp:TableRow>
+    <asp:TableCell BorderWidth="0">
+    <asp:Panel ID="pnFILL" runat="server">
+    <table width="80%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td><p>SysID</p></td>            
+            <td><asp:DropDownList ID="mlSYSID" runat="server"></asp:DropDownList></td>
+        </tr>
+        
+        <tr>
+            <td><p>Menu ID</p></td>
+            <td><asp:TextBox ID="mlMENUID" runat="server" /></td>            
+        </tr>
+        
+        <tr>
+            <td><p>Description</p></td>
+            <td><asp:TextBox ID="mlDESC" width="500" runat="server" /></td>
+        </tr>
+        
+        <tr>
+            <td><p>Exec File</p></td>
+            <td><asp:TextBox ID="mlEXEC" width="300" runat="server" /></td>
+        </tr>
+        
+        <tr>
+            <td><p>Special Parameter</p></td>
+            <td><asp:TextBox ID="mlSPECIALPARAM" width="300" runat="server" /></td>
+        </tr>
+        
+        <tr>
+            <td><p>Level Access</p></td>
+            <td><asp:TextBox ID="mlLEVELACCESS" runat="server" /></td>
+        </tr>
+        
+        <tr>
+            <td><p>Menu Type</p></td>
+            <td><asp:DropDownList ID="mlMENUTYPE" runat="server"></asp:DropDownList></td>
+        </tr>
+        
+        <tr>
+            <td><p>Menu Trans Type</p></td>
+            <td><asp:TextBox ID="mlMENUTRAN" runat="server" /></td>
+        </tr>
+        
+        <tr>
+            <td><p>Time Expired</p></td>
+            <td>
+                <asp:TextBox ID="mlTIMEEXP" runat="server" />                
+            </td>
+            
+        </tr>        
+    </table>    
+    <hr />
+    </asp:Panel>
+    </asp:TableCell>
+    </asp:TableRow>
+
+    <asp:TableRow>
+    <asp:TableCell>
+
+    <asp:Panel ID="pnGRID" runat="server">    
+
+    <asp:DataGrid runat="server" ID="mlDATAGRID" 
+    OnItemCommand="mlDATAGRID_ItemCommand"    
+    autogeneratecolumns="false"
+    CssClass="Grid">	    
+
+    <HeaderStyle CssClass="GridHeader"></HeaderStyle>
+    <ItemStyle CssClass="GridItem"></ItemStyle>
+    <EditItemStyle  CssClass="GridItem" />
+    <PagerStyle  CssClass="GridItem" />
+    <AlternatingItemStyle CssClass="GridAltItem"></AlternatingItemStyle>
+    <Columns>  
+
+        <asp:TemplateColumn>
+            <ItemTemplate>
+            <asp:imagebutton id="btBrowseRecord" Runat="server" AlternateText="BrowseRecord" ImageUrl="~/images/toolbar/browse.jpg" CommandArgument='<%# DataBinder.Eval(Container,"DataItem.MenuID")%>' CommandName="BrowseRecord">
+                </asp:imagebutton>
+            </ItemTemplate>
+        </asp:TemplateColumn>           
+        
+        <asp:TemplateColumn>
+            <ItemTemplate>
+            <asp:imagebutton id="btEditRecord" Runat="server" AlternateText="Edit" ImageUrl="~/images/toolbar/edit.jpg" CommandArgument='<%# DataBinder.Eval(Container,"DataItem.MenuID")%>' CommandName="EditRecord">
+                </asp:imagebutton>
+            </ItemTemplate>
+        </asp:TemplateColumn>   
+        
+         <asp:TemplateColumn>
+            <ItemTemplate>
+            <asp:imagebutton id="btDeleteRecord" Runat="server" AlternateText="Delete" ImageUrl="~/images/toolbar/delete.jpg" CommandArgument='<%# DataBinder.Eval(Container,"DataItem.MenuID")%>' OnClientClick="return confirm('Save Record ?');" CommandName="DeleteRecord">
+                </asp:imagebutton>
+            </ItemTemplate>
+        </asp:TemplateColumn>     
+        
+        <asp:BoundColumn Headertext="SysID" DataField="SysID"></asp:BoundColumn>        
+        <asp:BoundColumn HeaderText="MenuID" DataField="MenuID"></asp:BoundColumn>
+        <asp:BoundColumn HeaderText="Description" DataField="Description"></asp:BoundColumn>
+        <asp:BoundColumn HeaderText="ExecFile" DataField="ExecFile"></asp:BoundColumn>
+        <asp:BoundColumn HeaderText="SpecialParameter" DataField="SpecialParameter"></asp:BoundColumn>
+        <asp:BoundColumn HeaderText="LevelAccess" DataField="LevelAccess"></asp:BoundColumn>
+        <asp:BoundColumn HeaderText="MenuType" DataField="MenuType"></asp:BoundColumn>
+        <asp:BoundColumn HeaderText="MenuTransType" DataField="MenuTransType"></asp:BoundColumn>
+        <asp:BoundColumn HeaderText="TimeExpired" DataField="TimeExpired"></asp:BoundColumn>
+        <asp:BoundColumn HeaderText="Recuserid" DataField="Recuserid"></asp:BoundColumn>
+        <asp:BoundColumn HeaderText="Recdate" DataField="Recdate"></asp:BoundColumn>      
+        
+        </Columns>
+        </asp:DataGrid>  
+    </asp:Panel>
+
+    </asp:TableCell>
+    </asp:TableRow>
+
+</asp:Table>
+    <table border="0" cellpadding="2" cellspacing="1" width="100%">
+        <tr>
+            <td align="left">
+                    <asp:ImageButton ID="imbFirstPage" runat="server"  ImageUrl="~/Images/button/butkiri1.gif" CommandName="First" OnCommand="NavigationEvent" CausesValidation="false" />
+              &nbsp;<asp:ImageButton ID="imbPrevPage" runat="server" ImageUrl="~/Images/button/butkiri.gif" CommandName="Prev" OnCommand="NavigationEvent" CausesValidation="false" />
+              &nbsp;<asp:ImageButton ID="imbNextPage" runat="server" ImageUrl="~/Images/button/butkanan.gif" CommandName="Next" OnCommand="NavigationEvent" CausesValidation="false" />
+              &nbsp;<asp:ImageButton ID="imbLastPage" runat="server" ImageUrl="~/Images/button/butkanan1.gif" CommandName="Last" OnCommand="NavigationEvent" CausesValidation="false" />
+              &nbsp;Page:
+                    <asp:TextBox ID="txtPageNo" runat="server" Width="62px" CssClass="inptype"></asp:TextBox>
+              &nbsp;<asp:ImageButton ID="imbPageGo" runat="server" ImageUrl="~/Images/button/buttonGO.gif" onclick="imbPageGo_Click" />
+                        <asp:RangeValidator ID="rgvGo" runat="server" ControlToValidate="txtPageNo" 
+                            Display="Dynamic" ErrorMessage="Page is not valid" Font-Names="Verdana" 
+                            Font-Size="Smaller" MinimumValue="0"></asp:RangeValidator>
+             </td>
+             <td align="right">
+                <font color="#999999"><font face="Verdana" size="2">Page&nbsp; </font>
+                    <asp:Label ID="lblPage" runat="server" Font-Names="Verdana" Font-Size="Smaller"></asp:Label>
+                    <font face="Verdana" size="2">&nbsp;of</font>
+                    <asp:Label ID="lblTotPage" runat="server" Font-Names="Verdana" 
+                        Font-Size="Smaller"></asp:Label>
+                    <font face="Verdana" size="2">, Total&nbsp; </font>
+                    <asp:Label ID="lblTotRec" runat="server" Font-Size="Smaller"></asp:Label>
+                    &nbsp;<font face="Verdana" size="2">record(s)</font></font>
+             </td>
+        </tr>
+    </table>
+</form>
+<br /><br /><br /><br />
+</asp:Content>
+

@@ -1,0 +1,30 @@
+<%@ Master Language="VB" CodeFile="MasterLogin.master.vb" Inherits="MasterGeneral" %>
+<%@ Register TagPrefix="menubottom" TagName="menubottom" src="menubottom.ascx" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../script/style.css" />
+</head>
+
+<body>
+    <div id="content">
+    <div id="header">
+    </div>
+    
+    <div id="login">     
+    <div id="log"> 
+        <asp:contentplaceholder id="mpCONTENT" runat="server">
+        </asp:contentplaceholder>        
+    </div>
+    </div>
+        
+    <div>        
+        <menubottom:menubottom runat="server" ID="menubottomsidebar" />        				
+    </div>
+    </div>
+
+</body>
+</html>

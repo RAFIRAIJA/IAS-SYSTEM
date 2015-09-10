@@ -1,0 +1,116 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+body {
+	background-image:url(../images-page/bg.jpg);
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+
+#header { margin:auto; width:1020px; height:131px; background-image:url(../images-page/header.jpg); }
+#menu-user { margin:auto; width:1020px; height:inherit;}
+#login-info { margin:auto; width:900px; height:20px; text-align:right; padding-right:30px; 
+font-family:Arial, Helvetica, sans-serif; font-size:14px; }
+
+#headline-worksheet { width:1020px; height:94px; background:url(../project/headline-worksheet.jpg); }
+#headline-receipt { width:1020px; height:94px; background:url(../project/headline-receipt.jpg); }
+#headline-receiptdata { width:1020px; height:94px; background:url(../project/headline-receiptdata.jpg); }
+#headline-report { width:1020px; height:94px; background:url(../project/headline-Report.jpg) }
+#headline-performance-report { width:1020px; height:94px; background:url(../project/headline-PerformanceReport.jpg); }
+
+#fg { margin:auto; width:1020px; }
+#fg-users 		{ float:left; margin-left:10px;margin-bottom:50px;width:700px; }
+#fg-messanger 	{ float:right; margin-right:10px;margin-bottom:50px;width:400px; }
+
+#div-upload { width:1000px; height:300px; background-color:#FFF; padding:10px;
+    		 -moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; border:#CCC solid 2px; }
+#tb-upload { width:1000px; height:290px;  }
+
+#div-today-report { width:1000px; height:120px; background-color:#FFF; padding:10px;
+    			 -moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; border:#CCC solid 2px; }
+
+#space { width:1020px; height:20px; }
+
+#space-page { margin:auto; width:inherit; height:auto; }
+#line-blue { width:1020px; height:19px; background:url(../project/line-blue.jpg); }
+
+#txt-title { font-size:16px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;
+		 	 margin:auto; width:1020px; height:20px; }
+#txt-daterange { font-size:16px; font-family:Arial, Helvetica, sans-serif;
+		 	 margin:auto; width:1020px; height:20px; }
+#txt-info { font-size:14px; font-family:Arial, Helvetica, sans-serif; }
+#txt-h1 { font-size:14px; font-weight:bold; font-family:Arial, Helvetica, sans-serif;
+ -moz-border-radius: 6px; -webkit-border-radius: 6px; border-radius: 6px; padding:8px; }
+ 
+#txt-angka { font-family:Arial, Helvetica, sans-serif; font-size:46px; font-weight:bold; }
+
+.Grid
+{
+	border: solid 1px Tan;
+}
+
+.Grid td
+{
+	border: solid 1px #FFFFFF;
+	margin: 3px 3px 3px 3px;
+	font-family: Arial;
+	padding: 5px 5px 5px 5px;
+}
+
+.GridHeader
+{
+    font-weight: bold;	
+	font-size: 12px;
+	background-color:orange;
+	vertical-align:top;
+	text-align:center; 	
+}
+
+.GridHeader a
+{
+	text-decoration: none;
+	color: #723C03;
+	padding: 0px 15px 0px 15px;	
+	font-weight: bold;
+}
+
+.GridHeader a:hover
+{
+	text-decoration: underline;
+	color: #FFFFFF;	
+	background: Tan url(../images/spin.gif) no-repeat 0 100%;		
+	font-weight: bold;	
+}
+
+.GridHeader a:visited
+{
+	text-decoration: underline;
+	color: #B47B3E;	
+	background: Tan url(../../images/toolbar/spin.gif) no-repeat 0 100%;	
+	
+	
+}
+
+
+.GridItem, .GridAltItem
+{
+	font-size: 11px;
+}
+
+.GridItem
+{
+	background-color: #FFFFFF;
+}
+
+.GridAltItem
+{
+	background-color: #F9FCA8;
+}
+
+.GridPager
+{
+	font-size: 11px;
+	background-color: #FFFFFF;
+}

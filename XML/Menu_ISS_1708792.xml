@@ -1,0 +1,36 @@
+<?xml version='1.0'?>
+<MsMenu>
+<MsMenuItem title='IAS APPLICATION' url='#' result='SM' menuid='00000' ><MsMenuItem title='Administration' url='#' result='SM' menuid='AD000' ><MsMenuItem title='Ganti Password' url='../pj_ad/ad_updatepwd.aspx' result='MN' menuid='AD008' ></MsMenuItem>
+<MsMenuItem title='Change Menu Style' url='../pj_ad/ad_menustyle.aspx' result='MN' menuid='AD019' ></MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Account Payable' url='#' result='SM' menuid='AP000' ><MsMenuItem title='Master' url='#' result='SM' menuid='APM01' ><MsMenuItem title='AP MR Template' url='../pj_ap/ap_mr_template.aspx' result='MN' menuid='AP001' ></MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Posting' url='#' result='SM' menuid='APP01' ><MsMenuItem title='AP MR Posting 1 Review' url='../pj_ap/ap_post_mrbatch.aspx?mpFP=2' result='MN' menuid='AP003' ></MsMenuItem>
+<MsMenuItem title='AP MR Posting 2 Authorize' url='../pj_ap/ap_post_mrbatch.aspx?mpFP=3' result='MN' menuid='AP004' ></MsMenuItem>
+<MsMenuItem title='AP MR Posting to PO' url='../pj_ap/ap_post_mrbatch_appo.aspx?mpFP=1' result='MN' menuid='AP005' ></MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Report' url='#' result='SM' menuid='APR01' ><MsMenuItem title='AP MR Report1' url='../pj_ap/ap_rpt_mr_request.aspx?mpFP=1' result='MN' menuid='AP007' ></MsMenuItem>
+<MsMenuItem title='AP MR No Request Rpt' url='../pj_ap/ap_rpt_mr_sitenorequest.aspx?mpFP=1' result='MN' menuid='AP008' ></MsMenuItem>
+<MsMenuItem title='AP MR (Wait) Report' url='../pj_ap/ap_rpt_mr_request_wait.aspx' result='MN' menuid='AP009' ></MsMenuItem>
+<MsMenuItem title='AP Delivery Note (MR) Report' url='../pj_ap/ap_rpt_mr_do.aspx' result='MN' menuid='AP010' ></MsMenuItem>
+<MsMenuItem title='AP MR Document Report' url='../pj_ap/ap_rpt_mr_request_mr_cr.aspx' result='MN' menuid='AP015' ></MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Transaksi' url='#' result='SM' menuid='APT01' ><MsMenuItem title='AP MR Entry (ISS)' url='../pj_ap/ap_mr_entry.aspx?mpFP=1' result='MN' menuid='AP002' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IFS)' url='../pj_ap/ap_mr_entry.aspx?mpFP=2' result='MN' menuid='AP011' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IPM)' url='../pj_ap/ap_mr_entry.aspx?mpFP=3' result='MN' menuid='AP012' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ICS)' url='../pj_ap/ap_mr_entry.aspx?mpFP=4' result='MN' menuid='AP013' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ISS-BALIKPAPAN)' url='../pj_ap/ap_mr_entry.aspx?mpFP=1A1' result='MN' menuid='AP047' ></MsMenuItem>
+</MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='File System' url='#' result='SM' menuid='FS000' ><MsMenuItem title='Master' url='#' result='SM' menuid='APM08' ></MsMenuItem>
+<MsMenuItem title='Posting' url='#' result='SM' menuid='APP08' ></MsMenuItem>
+<MsMenuItem title='Report' url='#' result='SM' menuid='APR08' ></MsMenuItem>
+<MsMenuItem title='Transaction' url='#' result='SM' menuid='APT08' ><MsMenuItem title='FS File Download' url='../pj_fs/fs_file_download.aspx' result='MN' menuid='FS001' ></MsMenuItem>
+<MsMenuItem title='FS File Upload' url='../pj_fs/fs_file_upload.aspx' result='MN' menuid='FS002' ></MsMenuItem>
+</MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Inventory' url='#' result='SM' menuid='IN000' ><MsMenuItem title='Master' url='#' result='SM' menuid='APM05' ><MsMenuItem title='Inventory Image' url='../pj_in/in_inv_image.aspx' result='MN' menuid='IN001' ></MsMenuItem>
+</MsMenuItem>
+</MsMenuItem>
+</MsMenuItem>
+</MsMenu>

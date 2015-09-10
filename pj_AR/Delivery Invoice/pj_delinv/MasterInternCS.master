@@ -1,0 +1,130 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterInternCS.master.cs" Inherits="MasterInternCS_00" %>
+<%@ Register TagPrefix="menubottom" TagName="menubottom" src="menubottom.ascx" %>
+<%@ Register TagPrefix="menutop" TagName="menutop" src="menutop.ascx" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>    
+    <link rel="stylesheet" href="../script/dropdown/dropdown.css" type="text/css" />
+    <script type="text/javascript" src="../script/dropdown/dropdown.js"></script>
+</head>
+<body>
+    
+    <div id="content">
+    <div id="header"></div>
+
+      
+    <% try { %>    
+    
+    <%    
+        mlMENUCODE = "";
+        mlMENUCODETEMP = "";
+        mlFIRST = true;
+        mlCLOSETAG = false;
+        mlMENUFILL = false;
+        mlMENUINT = 0;
+    %>
+    
+    <%  while (mlREADERM.Read()) %>
+    <%
+        {
+        mlMENUCODETEMP = mlREADERM["ColInd"].ToString();
+        if (mlMENUCODE != mlMENUCODETEMP)
+        {
+            mlMENUCODE = mlMENUCODETEMP;
+            if (mlMENUCODETEMP == "02" || mlMENUCODETEMP == "05" || mlMENUCODETEMP == "08" || mlMENUCODETEMP == "11" || mlMENUCODETEMP == "14" || mlMENUCODETEMP == "17" || mlMENUCODETEMP == "20" || mlMENUCODETEMP == "23")
+            {
+                if (mlFIRST == true)
+                    {
+                        mlFIRST = true;
+                        mlCLOSETAG = false;
+                    }
+                    else
+                    {
+                        mlCLOSETAG = true;
+                    }
+                    mlMENUFILL = true;
+            }
+            else if (mlMENUCODETEMP == "03" || mlMENUCODETEMP == "06" || mlMENUCODETEMP == "09" || mlMENUCODETEMP == "12" || mlMENUCODETEMP == "15" || mlMENUCODETEMP == "18" || mlMENUCODETEMP == "21")
+            {
+                mlCLOSETAG = true;
+                mlMENUFILL = false;
+            }
+            
+     %>                              
+     
+     <%           
+            else if (mlMENUCODETEMP == "01" || mlMENUCODETEMP == "04" || mlMENUCODETEMP == "07" || mlMENUCODETEMP == "10" || mlMENUCODETEMP == "13" || mlMENUCODETEMP == "16" || mlMENUCODETEMP == "19" || mlMENUCODETEMP == "22")
+     {
+            mlCLOSETAG = false;
+            mlMENUFILL = false;
+            mlMENUINT = Convert.ToByte(Convert.ToInt32(mlMENUINT) + 1);
+            mlMENUID = Convert.ToString(mlMENUINT);
+            //mlMENUID = mlREADERM("Description")
+            
+     %>                              
+        <dl class="dropdown">        
+            <dt id="<%=mlMENUID + "-ddheader" %>" onmouseover="ddMenu('<%=mlMENUID %>',1)" onmouseout="ddMenu('<%=mlMENUID %>',-1)"><p class="2"><%=mlREADERM["Description"]%></p></dt>
+            <dd id="<%=mlMENUID + "-ddcontent" %>" onmouseover="cancelHide('<%=mlMENUID %>')" onmouseout="ddMenu('<%=mlMENUID %>',-1)">
+            <ul>
+     <%           
+         }
+    }
+    %>    
+    
+    
+    
+    <% if (mlMENUFILL == true) {%>    
+        <li><p class="2"><a href=<%=mlREADERM["execfile"].ToString()%> class="underline"><%=mlREADERM["Description"].ToString()%></a></p></li>                
+    <% } %>
+    
+    
+    
+    <%  if (mlCLOSETAG == true)
+        { mlCLOSETAG = false;
+    %>
+        </ul>
+        </dd>
+    </dl>
+    <% } %>
+      
+    <% } %>
+    
+    <% 
+        }
+    catch
+    {
+    }
+    %>   
+    
+            </ul>
+        </dd>
+    </dl>
+
+   
+       
+    <div style="clear:both" />
+            
+    
+    <div id="contentpage"  style="width:1000px">                
+        <div style="padding-top:10px;">                
+        </div>
+               
+        <img src="../images/system/logintext.gif" alt=""/>
+        <asp:Label id="lbTEXT" runat="server"></asp:Label>
+       
+         
+        <asp:contentplaceholder id="mpCONTENT" runat="server">
+        </asp:contentplaceholder>               
+    </div>
+        
+    <div>        
+        <menubottom:menubottom runat="server" ID="menubottomsidebar" />        				
+    </div>
+    
+    </div>    
+
+</body>
+</html>

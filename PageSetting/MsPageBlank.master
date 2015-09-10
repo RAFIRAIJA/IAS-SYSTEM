@@ -1,0 +1,16 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MsPageBlank.master.cs" Inherits="pagesetting_MasterPage2" %>
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>ISS - MROnline</title>
+    <link rel="stylesheet" type="text/css" href="../script/style.css" />    
+</head>
+<body>    
+    <div id="logmenu">
+        <asp:contentplaceholder id="mpCONTENT" runat="server">
+        </asp:contentplaceholder>
+    </div>
+
+</body>
+</html>

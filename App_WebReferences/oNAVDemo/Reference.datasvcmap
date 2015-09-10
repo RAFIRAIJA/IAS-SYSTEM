@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="efece1e1-f95c-4e1f-95aa-f2f567148a19" xmlns="urn:schemas-microsoft-com:xml-dataservicemap">
+  <MetadataSources>
+    <MetadataSource Address="http://wcf-uat.nav.issworld.com:8058/NAV71_UATWS/OData" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.edmx" MetadataType="Edmx" ID="4b196604-139e-4b40-a950-010307d22373" SourceId="1" SourceUrl="http://wcf-uat.nav.issworld.com:8058/NAV71_UATWS/OData" />
+  </Metadata>
+  <Extensions />
+  <Parameters />
+</ReferenceGroup>

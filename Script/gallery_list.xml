@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<thumbnails>
+	
+	<config 
+		auto_align="true"
+		enable_fullscreen="true"
+		folder="images/project/thumbnails/"
+		tween_duration="0.4"
+		tn_border_size="0"
+		tn_border_color="0xFFFFFF"
+		tn_alpha="true"
+		x_spacing="100"
+		y_spacing="0"
+		side_tn_count="3">
+	</config>
+	
+	<thumbnail> 
+		<filename>1.jpg</filename> 
+		<url>images/project/1.jpg</url> 
+		<target>_blank</target> 
+	</thumbnail>
+	
+	<thumbnail> 
+		<filename>2.jpg</filename> 
+		<url>images/project/2.jpg</url> 
+		<target>_blank</target> 
+	</thumbnail> 
+	
+	<thumbnail> 
+		<filename>3.jpg</filename> 
+		<url>images/project/3.jpg</url> 
+		<target>_blank</target> 
+	</thumbnail> 
+	
+	<thumbnail> 
+		<filename>4.jpg</filename> 
+		<url>images/project/4.jpg</url> 
+		<target>_blank</target> 
+	</thumbnail> 
+	
+	<thumbnail> 
+		<filename>5.jpg</filename> 
+		<url>images/project/5.jpg</url> 
+		<target>_blank</target> 
+	</thumbnail> 
+	
+	<thumbnail> 
+		<filename>6.jpg</filename> 
+		<url>images/project/6.jpg</url> 
+		<target>_blank</target> 
+	</thumbnail> 
+	
+	<thumbnail> 
+		<filename>7.jpg</filename> 
+		<url>images/project/7.jpg</url> 
+		<target>_blank</target> 
+	</thumbnail> 
+	
+	<thumbnail> 
+		<filename>8.jpg</filename> 
+		<url>images/project/8.jpg</url> 
+		<target>_blank</target> 
+	</thumbnail> 
+	
+	
+	
+	
+</thumbnails>

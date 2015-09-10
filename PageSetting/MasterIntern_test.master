@@ -1,0 +1,121 @@
+<%@ Master Language="VB" CodeFile="MasterIntern_test.master.vb" Inherits="MasterIntern_00_test" %>
+<%@ Register TagPrefix="menubottom" TagName="menubottom" src="menubottom.ascx" %>
+<%@ Register TagPrefix="menutop" TagName="menutop" src="menutop.ascx" %>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>    
+    <link rel="stylesheet" href="../script/dropdown/dropdown.css" type="text/css" />
+    <script type="text/javascript" src="../script/dropdown/dropdown.js"></script>
+</head>
+
+<body>
+
+    <div id="content">
+    <div id="header"></div>
+    
+    <p>TESTER TEMPLATE</p>
+
+      
+    <% Try%>    
+    
+    <%        
+        mlMENUCODE = ""
+        mlMENUCODETEMP = ""
+        mlFIRST = True
+        mlCLOSETAG = False
+        mlMENUFILL = False
+        mlMENUINT = 0
+    %>
+    
+    <%  While mlREADERM.Read %>
+    <%
+        mlMENUCODETEMP = mlREADERM("ColInd")
+        If mlMENUCODE <> mlMENUCODETEMP Then
+            mlMENUCODE = mlMENUCODETEMP
+            Select Case mlMENUCODETEMP
+                Case "02", "05", "08", "11", "14", "17", "20"
+                    If mlFIRST = True Then
+                        mlFIRST = True
+                        mlCLOSETAG = False
+                    Else
+                        mlCLOSETAG = True
+                    End If
+                    mlMENUFILL = True
+                    
+                Case "03", "06", "09", "12", "15", "18"
+                    mlCLOSETAG = True
+                    mlMENUFILL = False
+     %>                              
+     
+     <%           
+     Case "01", "04", "07", "10", "13", "16", "19"
+         mlCLOSETAG = False
+         mlMENUFILL = False
+         mlMENUINT = mlMENUINT + 1
+         mlMENUID = mlMENUINT
+         'mlMENUID = mlREADERM("Description")
+     %>                              
+        <dl class="dropdown">        
+            <dt id="<%=mlMENUID & "-ddheader" %>" onmouseover="ddMenu('<%=mlMENUID %>',1)" onmouseout="ddMenu('<%=mlMENUID %>',-1)"><p class="2"><%=mlREADERM("Description")%></p></dt>
+            <dd id="<%=mlMENUID & "-ddcontent" %>" onmouseover="cancelHide('<%=mlMENUID %>')" onmouseout="ddMenu('<%=mlMENUID %>',-1)">
+            <ul>
+     <%           
+ End Select
+        End If
+    %>    
+    
+    
+    
+    <% If mlMENUFILL = True Then%>    
+        <li><p class="2"><a href=<%=mlREADERM("execfile")%> class="underline"><%=mlREADERM("Description")%></a></p></li>                
+    <% end if %>
+    
+    
+    
+    <%  If mlCLOSETAG = True Then 
+            mlCLOSETAG = False
+    %>
+        </ul>
+        </dd>
+    </dl>
+    <% End If %>
+      
+    <% End While%>
+    
+    <% 
+    Catch ex As Exception
+    End Try
+    %>   
+    
+            </ul>
+        </dd>
+    </dl>
+
+   
+       
+    <div style="clear:both" />
+            
+    
+    <div id="contentpage"  style="width:1000px">                
+        <div style="padding-top:10px;">                
+        </div>
+               
+        <img src="../images/system/logintext.gif" alt="" />
+        <asp:Label id="lbTEXT" runat="server"></asp:Label>
+       
+         
+        <asp:contentplaceholder id="mpCONTENT" runat="server">
+        </asp:contentplaceholder>               
+    </div>
+        
+    <div>        
+        <menubottom:menubottom runat="server" ID="menubottomsidebar" />        				
+    </div>
+    
+    </div>    
+</body>
+</html>

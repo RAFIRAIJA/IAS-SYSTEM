@@ -1,0 +1,361 @@
+﻿body
+{
+	background-color: #ffffff;
+	font-family: Arial;
+	font-size: 12px;
+	color: #011E09; /*scrollbar-face-color: antiquewhite; 	scrollbar-highlight-color: green; 	scrollbar-3dlight-color: yellow; 	scrollbar-darkshadow-color: black; 	scrollbar-shadow-color: antiquewhite; 	scrollbar-arrow-color: blue; 	scrollbar-track-color: lightyellow;*/
+	width: 1000px;
+	margin: 0 auto;
+}
+
+a
+{
+	font-family: Arial;
+	font-size: 12px;
+	color: #0049ae;
+	text-decoration: underline;
+}
+
+a:link
+{
+	font-family: Arial;
+	font-size: 12px;
+	color: #0049ae;
+}
+a:visited
+{
+	font-family: Arial;
+	font-size: 12px;
+	color: #76046f;
+}
+
+a:hover
+{
+	font-family: Arial;
+	font-size: 12px;
+	color: #ff861b;
+}
+
+.date
+{
+	font-family: Arial;
+	font-size: 11px;
+	color: #999999;
+}
+
+#produk
+{
+	background-image: url("../Images/button/produk_bg.gif" );
+}
+
+#produkImage
+{
+	padding-left: 5px;
+	padding-bottom:5px;
+}
+#produkDetail
+{
+	padding-left: 10px;
+	padding-bottom:5px;
+}
+#testimoni
+{
+	font-family: Arial;
+	font-size: 13px;
+	font-weight: bold;
+	color: Black; /*border-bottom:2pt solid #B2B2B2;*/
+	width: 250px;
+	text-align:left;
+}
+
+#berita
+{
+	font-family: Arial;
+	font-size: 13px;
+	font-weight: bold;
+	color: Black; /*border-bottom:2pt solid #B2B2B2;*/
+	width: 250px;
+	text-align:left;
+}
+
+.header1 {
+	padding-bottom:0px;
+	color:#5377A9;
+	font-family:cambria;
+	font-weight:bold;
+	font-size:1.5em;
+}
+
+.header2 {	
+	color:#000000;
+	font-family:cambria;
+	font-weight:bold;
+	font-size:16px;
+}
+
+
+h1
+{
+	font-family: Arial;
+	font-size: 36px;
+	color: #011E09;
+}
+
+h2
+{
+	font-family: Arial;
+	font-size: 24px;
+	color: #011E09;
+}
+h3
+{
+	font-family: Arial;
+	font-size: 24px;
+	color: #011E09;
+}
+
+h4
+{
+	font-family: Arial;
+	font-size: 18px;
+	color: #011E09;
+}
+
+
+h5
+{
+	font-family: Arial;
+	font-size: 12px;
+	color: #011E09;
+}
+
+h6
+{
+	font-family: Arial;
+	font-size: 8px;
+	color: #011E09;
+}
+
+hr
+{
+	color: #5377A9;	
+	background-color: #5377A9;
+	width: 100%;
+	height: 1px;
+}
+
+table
+{
+	margin: 0px;
+	padding: 0px;
+	font-family: Arial;
+		font-size: 12px;
+		color: #011E09;
+		width: 998px;
+}
+
+.note
+{
+	font-family: Arial;
+	font-size: 14px;
+	color: purple;
+	font-weight: bold;
+}
+
+#login
+{
+	background: url("../images/background/login.png" );
+	height: 400px;
+	margin: 0 auto;	
+    width:1000px;
+}
+
+#log
+{
+	font-family: Arial;
+	font-size: 12px;	
+	margin: 0 auto;
+	padding-top: 70px;
+}
+
+#footer
+.links
+{
+	font-family: Arial;
+	font-size: 12px;
+	color: Black;
+}
+
+#footer
+{
+	background-image: url("../images/background/footer.png" );
+	height: 50px;
+	width: 1000px;
+    bottom: 0;
+    position: fixed;
+}
+
+.links
+{
+	float: left;
+	margin-top:30px;
+	position: relative;
+	left: 20%;
+}
+
+/*.login
+{
+	background-image: url(    "../Images/button/masuk.gif" );
+	height: 23px;
+	width: 50px;
+	background-repeat: no-repeat;
+}
+
+.login:hover
+{
+	background-image: url(    "../Images/button/masuk_hover.gif" );
+	height: 23px;
+	width: 50px;
+	background-repeat: no-repeat;
+}*/
+
+#header
+{
+	background-image: url("../images/background/header.png" );
+	height: 76px;
+	width: 1000px;
+}
+#headermenu
+{
+	background-image: url("../images/background/headermenu.png" );
+	height: 76px;
+	width: 1360px;
+}
+
+p.2
+{
+ font-family:"Arial";
+ font-size: 5px;
+
+}
+
+.sidemenu{
+width: 180px;
+float:left;
+padding-right:20px;
+}
+
+.arrowlistmenu .headerbar{
+font: bold 14px Arial;
+color: white;
+background: url(../images/background/titlebar.png) center left;
+margin-bottom: 4px;
+text-transform: uppercase;
+padding: 4px 0 4px 10px;
+}
+
+.arrowlistmenu ul{
+list-style-type: none;
+margin: 0;
+padding: 0;
+margin-bottom: 8px;
+}
+
+.arrowlistmenu ul li{
+padding-bottom: 2px;
+}
+
+.arrowlistmenu ul li a{
+color: #A70303;
+background: url(../images/background/arrowbullet.png) no-repeat center left;
+display: block;
+padding: 2px 0;
+padding-left: 19px;
+text-decoration: none;
+font-weight: bold;
+border-bottom: 1px solid #dadada;
+}
+
+.arrowlistmenu ul li a:visited{
+color: #5377A9;
+}
+
+.arrowlistmenu ul li a:hover{
+color: #A70303;
+background-color: #eef2f4;
+}
+
+#contentpage
+{
+width: 800px;
+float: left;
+}
+
+
+.Grid
+{
+	border: solid 1px Tan;
+}
+
+.Grid td
+{
+	border: solid 1px #FFFFFF;
+	margin: 3px 3px 3px 3px;
+	font-family: Arial;
+	padding: 5px 5px 5px 5px;
+	text-align: center;
+}
+
+.GridHeader
+{
+    font-weight: bold;	
+	font-size: 12px;
+	background-color:orange;
+	vertical-align:top;
+	text-align:center; 	
+}
+
+.GridHeader a
+{
+	text-decoration: none;
+	color: #723C03;
+	padding: 0px 15px 0px 15px;	
+	font-weight: bold;
+}
+
+.GridHeader a:hover
+{
+	text-decoration: underline;
+	color: #FFFFFF;	
+	background: Tan url(images/spin.gif) no-repeat 0 100%;		
+	font-weight: bold;	
+}
+
+.GridHeader a:visited
+{
+	text-decoration: underline;
+	color: #B47B3E;	
+	background: Tan url(../images/toolbar/spin.gif) no-repeat 0 100%;			
+}
+
+.GridItem, .GridAltItem
+{
+	font-size: 11px;
+}
+
+.GridItem
+{
+	background-color: #FFFFFF;
+}
+
+.GridAltItem
+{
+	background-color: #F9FCA8;
+}
+
+.GridPager
+{
+	font-size: 11px;
+	background-color: #FFFFFF;
+}
+

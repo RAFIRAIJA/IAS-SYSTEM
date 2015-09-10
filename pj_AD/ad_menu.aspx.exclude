@@ -1,0 +1,152 @@
+<%@ Page Language="VB" MasterPageFile="~/pagesetting/MsPageBlank.master" AutoEventWireup="false" CodeFile="ad_menu.aspx.vb" Inherits="ad_menu" title="Menu Maintenance V2.00" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="mpCONTENT" Runat="Server">
+<form id="form1" runat="server">
+
+<asp:Table id="mlTABLE1" BorderWidth ="0" CellPadding ="0" CellSpacing="0" Width="100%" runat="server">
+
+<asp:TableRow>   
+<asp:TableCell > 
+<asp:Panel ID="pnTOOLBAR" runat="server">  
+<table border="0" cellpadding="0" cellspacing="0" >
+    <tr>
+        <td><asp:ImageButton id="btNewRecord" ToolTip="NewRecord" ImageUrl="~/images/toolbar/new.jpg" runat="server" />&nbsp;
+            <asp:ImageButton id="btSaveRecord" ToolTip="SaveRecord" ImageUrl="~/images/toolbar/save.jpg" runat="server" OnClientClick="return confirm('Save Record ?');" />&nbsp;
+            <asp:ImageButton id="btSearchRecord" ToolTip="SearchRecord" ImageUrl="~/images/toolbar/find.jpg" runat="server" />&nbsp;
+            <asp:ImageButton id="btCancelOperation" ToolTip="CancelOperation" ImageUrl="~/images/toolbar/cancel.jpg" runat="server" />&nbsp;            
+        </td>
+    </tr>               
+</table>
+<hr />
+</asp:Panel>
+</asp:TableCell>    
+</asp:TableRow>
+
+<asp:TableRow><asp:TableCell><p class="header1"><b><asp:Label id="mlTITLE" runat="server"></asp:Label></b></p></asp:TableCell></asp:TableRow>
+<asp:TableRow><asp:TableCell><p><asp:Label ID="mlMESSAGE" runat="server" ForeColor="Purple" Font-Italic="true"></asp:Label></p></asp:TableCell></asp:TableRow>
+<asp:TableRow><asp:TableCell><asp:HiddenField ID="mlSYSCODE" runat="server"/></asp:TableCell></asp:TableRow>
+
+<asp:TableRow>
+<asp:TableCell BorderWidth="0">
+<asp:Panel ID="pnFILL" runat="server">
+<table width="80%" cellpadding="0" cellspacing="0" border="0">
+    <tr>
+        <td><p>SysID</p></td>            
+        <td><asp:DropDownList ID="mlSYSID" runat="server"></asp:DropDownList></td>
+    </tr>
+    
+    <tr>
+        <td><p>Menu ID</p></td>
+        <td><asp:TextBox ID="mlMENUID" runat="server" /></td>            
+    </tr>
+    
+    <tr>
+        <td><p>Description</p></td>
+        <td><asp:TextBox ID="mlDESC" width="500" runat="server" /></td>
+    </tr>
+    
+    <tr>
+        <td><p>Exec File</p></td>
+        <td><asp:TextBox ID="mlEXEC" width="300" runat="server" /></td>
+    </tr>
+    
+    <tr>
+        <td><p>Special Parameter</p></td>
+        <td><asp:TextBox ID="mlSPECIALPARAM" width="300" runat="server" /></td>
+    </tr>
+    
+    <tr>
+        <td><p>Level Access</p></td>
+        <td><asp:TextBox ID="mlLEVELACCESS" runat="server" /></td>
+    </tr>
+    
+    <tr>
+        <td><p>Menu Type</p></td>
+        <td><asp:DropDownList ID="mlMENUTYPE" runat="server"></asp:DropDownList></td>
+    </tr>
+    
+    <tr>
+        <td><p>Menu Trans Type</p></td>
+        <td><asp:TextBox ID="mlMENUTRAN" runat="server" /></td>
+    </tr>
+    
+    <tr>
+        <td><p>Time Expired</p></td>
+        <td>
+            <asp:TextBox ID="mlTIMEEXP" runat="server" />                
+        </td>
+        
+    </tr>        
+</table>    
+<hr />
+</asp:Panel>
+</asp:TableCell>
+</asp:TableRow>
+
+<asp:TableRow>
+<asp:TableCell>
+
+
+<asp:Panel ID="pnGRID" runat="server">    
+
+<asp:DataGrid runat="server" ID="mlDATAGRID" 
+OnItemCommand="mlDATAGRID_ItemCommand"    
+autogeneratecolumns="false"
+CssClass="Grid"
+>	    
+
+<HeaderStyle CssClass="GridHeader"></HeaderStyle>
+<ItemStyle CssClass="GridItem"></ItemStyle>
+<EditItemStyle  CssClass="GridItem" />
+<PagerStyle  CssClass="GridItem" />
+<AlternatingItemStyle CssClass="GridAltItem"></AlternatingItemStyle>
+<Columns>  
+
+    <asp:TemplateColumn>
+        <ItemTemplate>
+        <asp:imagebutton id="btBrowseRecord" Runat="server" AlternateText="BrowseRecord" ImageUrl="~/images/toolbar/browse.jpg" CommandArgument='<%# DataBinder.Eval(Container,"DataItem.MenuID")%>' CommandName="BrowseRecord">
+        </asp:imagebutton>
+        </ItemTemplate>
+    </asp:TemplateColumn>   
+    
+    
+    <asp:TemplateColumn>
+        <ItemTemplate>
+        <asp:imagebutton id="btEditRecord" Runat="server" AlternateText="Edit" ImageUrl="~/images/toolbar/edit.jpg" CommandArgument='<%# DataBinder.Eval(Container,"DataItem.MenuID")%>' CommandName="EditRecord">
+        </asp:imagebutton>
+        </ItemTemplate>
+    </asp:TemplateColumn>   
+    
+     <asp:TemplateColumn>
+        <ItemTemplate>
+        <asp:imagebutton id="btDeleteRecord" Runat="server" AlternateText="Delete" ImageUrl="~/images/toolbar/delete.jpg" CommandArgument='<%# DataBinder.Eval(Container,"DataItem.MenuID")%>' OnClientClick="return confirm('Save Record ?');" CommandName="DeleteRecord">
+        </asp:imagebutton>
+        </ItemTemplate>
+    </asp:TemplateColumn>     
+    
+
+    <asp:BoundColumn Headertext="SysID" DataField="SysID"></asp:BoundColumn>        
+    <asp:BoundColumn HeaderText="MenuID" DataField="MenuID"></asp:BoundColumn>
+    <asp:BoundColumn HeaderText="Description" DataField="Description"></asp:BoundColumn>
+    <asp:BoundColumn HeaderText="ExecFile" DataField="ExecFile"></asp:BoundColumn>
+    <asp:BoundColumn HeaderText="SpecialParameter" DataField="SpecialParameter"></asp:BoundColumn>
+    <asp:BoundColumn HeaderText="LevelAccess" DataField="LevelAccess"></asp:BoundColumn>
+    <asp:BoundColumn HeaderText="MenuType" DataField="MenuType"></asp:BoundColumn>
+    <asp:BoundColumn HeaderText="MenuTransType" DataField="MenuTransType"></asp:BoundColumn>
+    <asp:BoundColumn HeaderText="TimeExpired" DataField="TimeExpired"></asp:BoundColumn>
+    <asp:BoundColumn HeaderText="Recuserid" DataField="Recuserid"></asp:BoundColumn>
+    <asp:BoundColumn HeaderText="Recdate" DataField="Recdate"></asp:BoundColumn>      
+    
+</Columns>
+</asp:DataGrid>  
+</asp:Panel>
+
+</asp:TableCell>
+</asp:TableRow>
+
+</asp:Table>
+
+</form>
+<br /><br /><br /><br />
+</asp:Content>
+

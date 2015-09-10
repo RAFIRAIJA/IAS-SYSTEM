@@ -1,0 +1,57 @@
+<%@ Master Language="VB" CodeFile="MasterPublic.master.vb" Inherits="MasterPublic3" %>
+
+<%@ Register TagPrefix="menutop" TagName="menutop" Src="menutop.ascx" %>
+<%@ Register TagPrefix="menuleft" TagName="menuleft" Src="menuleft.ascx" %>
+<%@ Register TagPrefix="menuright" TagName="menuright" Src="menuright.ascx" %>
+<%@ Register TagPrefix="menubottom" TagName="menubottom" Src="menubottom.ascx" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title>Mr.Indo</title>
+    <link href="../script/calendar.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="../script/calendar.js"></script>
+    <link rel="StyleSheet" href="../script/dtree.css" type="text/css" />
+    <script type="text/javascript" src="../script/dtree.js"></script>
+    <link rel="stylesheet" type="text/css" href="../script/style.css" />
+</head>
+
+<body>    
+    <form id="form1" runat="server">
+    <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+            <td valign="top">
+                <menutop:menutop runat="server" ID="menutopsidebar" />
+            </td>
+        </tr>
+        
+        <tr>
+            <td width="100%" align="center" valign="top">
+                <table width="830px" cellpadding="0" cellspacing="0" border="0">
+                    <tr>
+                        <% If Session("mgUSERID") <> "" Then%>
+                        <td valign="top" width="200px" align="left">
+                            <menuleft:menuleft runat="server" ID="menuleft" />
+                        </td>
+                        <td width="600px" align="left" valign="top">
+                            <% Else%>
+                            <td width="830px" align="left" valign="top">
+                                <%  End If%>
+                                <%--   start of contents   --%>
+                                <asp:ContentPlaceHolder ID="mlCONTENT" runat="server">
+                                </asp:ContentPlaceHolder>
+                                <%--   end of contents   --%>
+                            </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="100%" valign="top">
+                <menubottom:menubottom runat="server" ID="menubottomsidebar" />
+            </td>
+        </tr>
+    </table>
+    </form>
+</body>
+</html>

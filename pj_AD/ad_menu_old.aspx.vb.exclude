@@ -1,0 +1,427 @@
+Imports System
+Imports System.Data
+Imports System.Web.UI.HtmlControls
+Imports System.Drawing
+Imports System.Data.OleDb
+Imports System.IO
+'Imports ISS.App.Entities.pj_ad.administration
+
+Partial Class ad_menu
+    Inherits System.Web.UI.Page
+
+    Dim mlOBJGS As New IASClass.ucmGeneralSystem
+    Dim mlOBJGF As New IASClass.ucmGeneralFunction
+
+    Dim mlREADER As OleDb.OleDbDataReader
+    Dim mlSQL As String
+    Dim mlREADER2 As OleDb.OleDbDataReader
+    Dim mlSQL2 As String
+
+    Dim mlKEY As String
+    Dim mlRECORDSTATUS As String
+
+    '-- !Paging Variable
+    
+    Protected Property Pagesize() As Integer
+        Get
+            Return DirectCast(ViewState("Pagesize"), Integer)
+        End Get
+        Set(ByVal value As Integer)
+            ViewState("Pagesize") = value
+        End Set
+    End Property
+    Protected Property CurrentPage() As Integer
+        Get
+            Return DirectCast(ViewState("CurrentPage"), Integer)
+        End Get
+        Set(ByVal value As Integer)
+            ViewState("CurrentPage") = value
+        End Set
+    End Property
+    Protected Property TotalRecords() As Integer
+        Get
+            Return DirectCast(ViewState("TotalRecords"), Integer)
+        End Get
+        Set(ByVal value As Integer)
+            ViewState("TotalRecords") = value
+        End Set
+    End Property
+    Protected Property TotalPages() As Double
+        Get
+            Return DirectCast(ViewState("TotalPages"), Double)
+        End Get
+        Set(ByVal value As Double)
+            ViewState("TotalPages") = value
+        End Set
+    End Property
+    Protected Property CmdWhere() As String
+        Get
+            Return DirectCast(ViewState("CmdWhere"), String)
+        End Get
+        Set(ByVal value As String)
+            ViewState("CmdWhere") = value
+        End Set
+    End Property
+    Protected Property SortBy() As String
+        Get
+            Return DirectCast(ViewState("SortBy"), String)
+        End Get
+        Set(ByVal value As String)
+            ViewState("SortBy") = value
+        End Set
+    End Property
+
+    Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        mlTITLE.Text = "Menu Maintenance V2.02"
+        Me.Title = System.Configuration.ConfigurationManager.AppSettings("mgTITLE") & "Menu Maintenance V2.02"
+        mlOBJGS.Main()
+        If mlOBJGS.ValidateExpiredDate() = True Then
+            Exit Sub
+        End If
+        If Session("mgACTIVECOMPANY") = "" Then Session("mgACTIVECOMPANY") = mlOBJGS.mgCOMPANYDEFAULT
+        mlOBJGS.mgACTIVECOMPANY = Session("mgACTIVECOMPANY")
+
+
+        If Page.IsPostBack = False Then
+            DisableCancel()
+            RetrieveFieldsDetail()
+            mlOBJGS.XM_UserLog(Session("mgUSERID"), Session("mgNAME"), "ad_menu", "Menu", "")
+        Else
+        End If
+    End Sub
+
+
+    Protected Sub mlDATAGRID_ItemCommand(ByVal source As Object, ByVal e As System.Web.UI.WebControls.DataGridCommandEventArgs) Handles mlDATAGRID.ItemCommand
+        mlKEY = e.CommandArgument
+        Select Case e.CommandName
+            Case "BrowseRecord"
+                mlMESSAGE.Text = "Update Request for " & e.CommandArgument
+                RetrieveFields()
+                pnFILL.Visible = True
+            Case "EditRecord"
+                mlMESSAGE.Text = "Edit Request for  " & e.CommandArgument
+                EditRecord()
+            Case "DeleteRecord"
+                mlMESSAGE.Text = "Delete Request for  " & e.CommandArgument
+                DeleteRecord()
+            Case Else
+                ' Ignore Other
+        End Select
+    End Sub
+
+    Protected Sub btNewRecord_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btNewRecord.Click
+        NewRecord()
+    End Sub
+
+    Protected Sub btSaveRecord_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btSaveRecord.Click
+        If pnFILL.Visible = True Then
+            SaveRecord()
+        End If
+    End Sub
+
+    Protected Sub btCancelOperation_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btCancelOperation.Click
+        DisableCancel()
+    End Sub
+
+    Public Sub RetrieveFields()
+        ClearFields()
+        DisableCancel()
+
+        mlSQL = "SELECT * FROM AD_MENU WHERE MenuID = '" & Trim(mlKEY) & "'"
+        mlREADER = mlOBJGS.DbRecordset(mlSQL, "AD", "AD")
+        If mlREADER.HasRows Then
+            mlREADER.Read()
+            mlSYSID.Items.Add(mlREADER("SysID"))
+            mlMENUID.Text = mlREADER("MenuID") & ""
+            mlDESC.Text = mlREADER("Description") & ""
+            mlEXEC.Text = mlREADER("ExecFile") & ""
+            mlSPECIALPARAM.Text = mlREADER("SpecialParameter") & ""
+            mlLEVELACCESS.Text = mlREADER("LevelAccess") & ""
+            mlMENUTYPE.Items.Add(mlREADER("MenuType"))
+            mlMENUTRAN.Text = mlREADER("MenuTransType") & ""
+            mlTIMEEXP.Text = mlREADER("TimeExpired") & ""
+        End If
+        mlOBJGS.CloseFile(mlREADER)
+    End Sub
+
+    Sub RetrieveFieldsDetail()        
+        CurrentPage = 1
+        Pagesize = 10
+        getWhereCond()
+        SortBy = ""
+
+        'mlSQL2 = "SELECT * FROM AD_MENU WHERE ExecFile NOT LIKE '%.exe' ORDER BY MENUID"
+
+        'mlDATAGRID.DataSource = mlREADER2
+        'mlDATAGRID.DataBind()
+
+        'mlOBJGS.CloseFile(mlREADER2)
+
+        BindGrid()
+    End Sub
+
+    Sub DeleteRecord()
+        mlRECORDSTATUS = "Delete"
+        mlSQL = "DELETE FROM AD_MENU WHERE MenuID= '" & Trim(mlKEY) & "'"
+        mlOBJGS.ExecuteQuery(mlSQL, "AD", "AD")
+        RetrieveFields()
+        RetrieveFieldsDetail()
+    End Sub
+
+    Sub NewRecord()
+        EnableCancel()
+        ClearFields()
+
+        mlSYSID.Items.Clear()
+        mlMENUTYPE.Items.Clear()
+        LoadComboData()
+
+        mlMENUID.Text = "--AutoNumber--"
+        mlMENUID.Enabled = False
+        mlMENUID.BackColor = Color.Lavender
+    End Sub
+
+    Sub EditRecord()
+        RetrieveFields()
+        EnableCancel()
+        LoadComboData()
+    End Sub
+
+    Function GetMenuCounter(ByVal mpVALUE As String) As String
+        Dim rsTEMP As OleDb.OleDbDataReader
+        Dim sqlTEMP As String
+        Dim mlLASTCOUNTER As String
+        Dim mlVALUE As String = ""
+
+        If Len(mpVALUE) >= "2" Then
+            mlVALUE = mpVALUE.Substring(0, 2)
+        End If
+
+        sqlTEMP = "SELECT * FROM AD_MENU  WHERE LEFT(MENUID,2) = '" & mlVALUE & "' ORDER BY MENUID DESC"
+        rsTEMP = mlOBJGS.DbRecordset(sqlTEMP, "AD", "AD")
+        rsTEMP.Read()
+        If rsTEMP.HasRows Then
+            mlLASTCOUNTER = Mid(rsTEMP("MENUID"), 3, 10)
+            GetMenuCounter = mpVALUE & Format(mlLASTCOUNTER + 1, "000")
+        Else
+            GetMenuCounter = mpVALUE & Format(1, "000")
+        End If
+        mlOBJGS.CloseFile(rsTEMP)
+    End Function
+
+    Private Sub EnableCancel()
+        btNewRecord.Visible = False
+        btSaveRecord.Visible = True
+        pnFILL.Visible = True
+        pnGRID.Visible = False
+
+        mlSYSID.Enabled = True
+        mlMENUID.Enabled = False
+        mlDESC.Enabled = True
+        mlEXEC.Enabled = True
+        mlSPECIALPARAM.Enabled = True
+        mlLEVELACCESS.Enabled = True
+        mlMENUTYPE.Enabled = True
+        mlMENUTRAN.Enabled = True
+        mlTIMEEXP.Enabled = True
+    End Sub
+
+    Private Sub DisableCancel()
+        btNewRecord.Visible = True
+        btSaveRecord.Visible = False
+        pnFILL.Visible = False
+        pnGRID.Visible = True
+
+        mlSYSID.Enabled = False
+        mlMENUID.Enabled = False
+        mlDESC.Enabled = False
+        mlEXEC.Enabled = False
+        mlSPECIALPARAM.Enabled = False
+        mlLEVELACCESS.Enabled = False
+        mlMENUTYPE.Enabled = False
+        mlMENUID.Enabled = False
+        mlMENUTRAN.Enabled = False
+        mlTIMEEXP.Enabled = False
+    End Sub
+
+    Sub ClearFields()
+        mlSYSID.Items.Clear()
+        mlMENUTYPE.Items.Clear()
+
+        mlMENUID.Text = ""
+        mlDESC.Text = ""
+        mlEXEC.Text = ""
+        mlSPECIALPARAM.Text = ""
+        mlLEVELACCESS.Text = ""
+        mlMENUTRAN.Text = ""
+        mlTIMEEXP.Text = ""
+    End Sub
+
+    Sub LoadComboData()
+        mlSQL = "SELECT * FROM AD_MENUHDR ORDER BY SysID"
+        mlREADER = mlOBJGS.DbRecordset(mlSQL, "AD", "AD")
+        While mlREADER.Read
+            mlSYSID.Items.Add(Trim(mlREADER("SysID")) & "-" & mlREADER("Description"))
+        End While
+
+        mlSQL = "SELECT * FROM AD_MENUTYPE"
+        mlREADER = mlOBJGS.DbRecordset(mlSQL, "AD", "AD")
+        While mlREADER.Read
+            mlMENUTYPE.Items.Add(mlREADER("MenuType"))
+        End While
+        mlOBJGS.CloseFile(mlREADER)
+    End Sub
+
+    Sub SaveRecord()
+        Dim mlKEY As String
+        Dim mgUSERID As String
+        Dim mlSYSID2 As String
+
+        mgUSERID = Session("mgUSERID")
+        mlSYSID2 = Trim(mlOBJGF.GetStringAtPosition(mlSYSID.Text, 0, "-"))
+        If mlMENUID.Text = "--AutoNumber--" Then
+            mlKEY = GetMenuCounter(mlSYSID2)
+        Else
+            mlKEY = Trim(mlMENUID.Text)
+        End If
+
+        mlSQL = ""
+
+        mlSQL2 = "SELECT * FROM AD_GROUPMENU WHERE MENUID='" & mlKEY & "'"
+        mlREADER = mlOBJGS.DbRecordset(mlSQL2, "AD", "AD")
+        If mlREADER.HasRows Then
+            mlREADER.Read()
+            If IsDBNull(mlREADER("MenuDescription")) = False Then
+                If Trim(mlREADER("MenuDescription")) <> Trim(mlDESC.Text) Then
+                    mlSQL = mlSQL & "UPDATE AD_GROUPMENU SET MenuDescription = '" & Trim(mlDESC.Text) & "' WHERE MENUID='" & mlKEY & "';"
+                End If
+            End If
+        End If
+
+
+        mlSQL = mlSQL & "DELETE FROM AD_MENU WHERE MENUID='" & mlKEY & "';"
+        mlSQL = mlSQL & "INSERT INTO AD_MENU (SysID,MenuID,Description,ExecFile,SpecialParameter,LevelAccess,MenuType," & _
+               " MenuTransType,TimeExpired,Recuserid,Recdate) " & _
+               " VALUES ('" & Trim(mlSYSID2) & "', '" & Trim(mlMENUID.Text) & "', '" & Trim(mlDESC.Text) & "'," & _
+               " '" & Trim(mlEXEC.Text) & "', '" & Trim(mlSPECIALPARAM.Text) & "', '" & Trim(mlLEVELACCESS.Text) & "', '" & Trim(mlMENUTYPE.Text) & "'," & _
+               " '" & Trim(mlMENUTRAN.Text) & "','" & mlTIMEEXP.Text & "','" & mgUSERID & "','" & mlOBJGF.FormatDate(Now) & "'" & _
+               " );"
+        mlOBJGS.ExecuteQuery(mlSQL, "AD", "AD")
+
+        DisableCancel()
+        RetrieveFieldsDetail()
+    End Sub
+
+    Protected Sub BindGrid()
+        Dim dtListData As New DataTable
+
+        mlSQL2 = "exec sp_ListMenuPaging '" + CurrentPage.ToString() + "','" + Pagesize.ToString() + "','" + CmdWhere + "','" + SortBy + "',0"
+        'mlSQL2 = "exec adm_iss.dbo.sp_ListMenuPaging 1,10,'','',0"
+        mlREADER2 = mlOBJGS.DbRecordset(mlSQL2, "AD", "AD")        
+        If mlREADER2.HasRows Then
+            mlREADER2.Read()
+            TotalRecords = Convert.ToInt16(mlREADER2("TotalRecord").ToString())
+        End If
+        mlDATAGRID.DataSource = mlREADER2
+        mlDATAGRID.DataBind()
+
+
+
+        mlOBJGS.CloseFile(mlREADER2)
+        PagingFooter()
+    End Sub
+
+    Private Sub PagingFooter()
+
+        mlMESSAGE.Text = ""
+        lblPage.Text = CurrentPage.ToString()
+        TotalPages = Math.Ceiling(Double.Parse(TotalRecords.ToString()) / Double.Parse(Pagesize.ToString()))
+        If (TotalPages = 0) Then
+
+            mlMESSAGE.Text = MessageHelper.MESSAGE_DATA_NOT_FOUND
+            lblTotPage.Text = "1"
+            rgvGo.MaximumValue = "1"
+
+        Else
+
+            lblTotPage.Text = (System.Math.Ceiling(TotalPages)).ToString()
+            rgvGo.MaximumValue = (System.Math.Ceiling(TotalPages)).ToString()
+        End If
+
+        lblTotRec.Text = TotalRecords.ToString()
+
+        If (CurrentPage = 1) Then
+
+            imbPrevPage.Enabled = False
+            imbFirstPage.Enabled = False
+            If (TotalPages > 1) Then
+
+                imbNextPage.Enabled = True
+                imbLastPage.Enabled = True
+
+            Else
+
+                imbPrevPage.Enabled = False
+                imbNextPage.Enabled = False
+                imbLastPage.Enabled = False
+                imbFirstPage.Enabled = False
+            End If
+        Else
+            imbPrevPage.Enabled = True
+            imbFirstPage.Enabled = True
+            If (CurrentPage = TotalPages) Then
+                imbNextPage.Enabled = False
+                imbLastPage.Enabled = False
+            Else
+                imbLastPage.Enabled = True
+                imbNextPage.Enabled = True
+            End If
+        End If
+    End Sub
+
+    Protected Sub btSearchRecord_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btSearchRecord.Click
+        pnlSearch.Visible = True
+    End Sub
+
+    Protected Sub btnReset_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btnReset.Click
+        Response.Redirect("ad_menu.aspx")
+    End Sub
+
+    Protected Sub NavigationEvent(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.CommandEventArgs) Handles imbLastPage.Command
+        Select (e.CommandName)        
+            Case "First"
+                CurrentPage = 1
+            Case "Prev"
+                If (CurrentPage > 1) Then
+                    CurrentPage -= 1
+                End If
+            Case "Next"
+                If (CurrentPage < TotalPages) Then
+                    CurrentPage += 1
+                End If
+            Case "Last"
+                CurrentPage = Convert.ToInt16(TotalPages.ToString())
+        End Select
+        BindGrid()
+    End Sub
+
+    Protected Sub imbPageGo_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles imbPageGo.Click
+
+    End Sub
+
+    Protected Sub btnSearch_Click(ByVal sender As Object, ByVal e As System.Web.UI.ImageClickEventArgs) Handles btnSearch.Click
+        RetrieveFieldsDetail()
+    End Sub
+
+    Protected Sub getWhereCond()
+        If (ddlSearchBy.SelectedValue <> "") Then
+            CmdWhere = ""
+            If (txtSearchBy.Text.Contains("%")) Then
+                CmdWhere += " and " + ddlSearchBy.SelectedValue + " like ''%" + txtSearchBy.Text + "%''"
+            Else
+                CmdWhere += " and " + ddlSearchBy.SelectedValue + " = ''" + txtSearchBy.Text + "''"
+            End If
+        End If
+
+    End Sub
+End Class

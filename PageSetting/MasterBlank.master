@@ -1,0 +1,17 @@
+<%@ Master Language="VB" CodeFile="MasterBlank.master.vb" Inherits="MasterBlank" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">    
+    <link rel="stylesheet" href="../script/dropdown/dropdown.css" type="text/css" />
+    <script type="text/javascript" src="../script/dropdown/dropdown.js"></script>
+</head>
+<body>    
+    <div>
+        <asp:contentplaceholder id="mpCONTENT" runat="server">
+        </asp:contentplaceholder>
+    </div>
+    
+</body>
+</html>

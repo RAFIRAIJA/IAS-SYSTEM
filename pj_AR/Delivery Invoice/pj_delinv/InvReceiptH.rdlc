@@ -1,0 +1,758 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2008/01/reportdefinition">
+  <DataSources>
+    <DataSource Name="DummyDataSource">
+      <ConnectionProperties>
+        <DataProvider>SQL</DataProvider>
+        <ConnectString />
+      </ConnectionProperties>
+      <rd:DataSourceID>1f7d249a-9468-40c9-af8e-40625f2fcc56</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="INV_RECEIPT_DATAH">
+      <Fields>
+        <Field Name="InvNo">
+          <DataField>InvNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvCustCode">
+          <DataField>InvCustCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvCustName">
+          <DataField>InvCustName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvDate">
+          <DataField>InvDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="InvBranch">
+          <DataField>InvBranch</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvAmount">
+          <DataField>InvAmount</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="InvSiteCard">
+          <DataField>InvSiteCard</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvProdOffer">
+          <DataField>InvProdOffer</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvOCM">
+          <DataField>InvOCM</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvFCM">
+          <DataField>InvFCM</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvCollector">
+          <DataField>InvCollector</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvCodeMess">
+          <DataField>InvCodeMess</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvMessName">
+          <DataField>InvMessName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvStatus">
+          <DataField>InvStatus</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvDesc">
+          <DataField>InvDesc</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvReceiptCode">
+          <DataField>InvReceiptCode</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvResiTiki">
+          <DataField>InvResiTiki</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvProceedsDate">
+          <DataField>InvProceedsDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="InvPreparedForDate">
+          <DataField>InvPreparedForDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="InvDeliveredDate">
+          <DataField>InvDeliveredDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="InvReturnedDate">
+          <DataField>InvReturnedDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="InvDoneDate">
+          <DataField>InvDoneDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="InvCustPenerima">
+          <DataField>InvCustPenerima</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="UserID">
+          <DataField>UserID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="UserName">
+          <DataField>UserName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvCreatedDate">
+          <DataField>InvCreatedDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="InvCreatedBy">
+          <DataField>InvCreatedBy</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvModifiedDate">
+          <DataField>InvModifiedDate</DataField>
+          <rd:TypeName>System.DateTime</rd:TypeName>
+        </Field>
+        <Field Name="InvModifiedBy">
+          <DataField>InvModifiedBy</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="InvReceiptFlag">
+          <DataField>InvReceiptFlag</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Disabled">
+          <DataField>Disabled</DataField>
+          <rd:TypeName>System.Byte</rd:TypeName>
+        </Field>
+      </Fields>
+      <Query>
+        <DataSourceName>DummyDataSource</DataSourceName>
+        <CommandText>/* Local Query */</CommandText>
+      </Query>
+      <rd:DataSetInfo>
+        <rd:DataSetName>INV_RECEIPT_DATA</rd:DataSetName>
+        <rd:SchemaPath>J:\Application ISS\ISS\App_Code\INV_RECEIPT_DATA.xsd</rd:SchemaPath>
+        <rd:TableName>INV_DELIVERY</rd:TableName>
+        <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
+        <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
+        <rd:TableAdapterName>INV_DELIVERYTableAdapter</rd:TableAdapterName>
+      </rd:DataSetInfo>
+    </DataSet>
+  </DataSets>
+  <Body>
+    <ReportItems>
+      <Tablix Name="Tablix1">
+        <TablixBody>
+          <TablixColumns>
+            <TablixColumn>
+              <Width>2.16667in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.16667in</Width>
+            </TablixColumn>
+            <TablixColumn>
+              <Width>2.89584in</Width>
+            </TablixColumn>
+          </TablixColumns>
+          <TablixRows>
+            <TablixRow>
+              <Height>1.47917in</Height>
+              <TablixCells>
+                <TablixCell>
+                  <CellContents>
+                    <Subreport Name="Subreport1">
+                      <ReportName>InvReceiptD</ReportName>
+                      <Style>
+                        <Border>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </Subreport>
+                    <ColSpan>3</ColSpan>
+                  </CellContents>
+                </TablixCell>
+                <TablixCell />
+                <TablixCell />
+              </TablixCells>
+            </TablixRow>
+          </TablixRows>
+        </TablixBody>
+        <TablixColumnHierarchy>
+          <TablixMembers>
+            <TablixMember />
+            <TablixMember />
+            <TablixMember />
+          </TablixMembers>
+        </TablixColumnHierarchy>
+        <TablixRowHierarchy>
+          <TablixMembers>
+            <TablixMember>
+              <Group Name="Details" />
+              <TablixMembers>
+                <TablixMember />
+              </TablixMembers>
+            </TablixMember>
+          </TablixMembers>
+        </TablixRowHierarchy>
+        <RepeatRowHeaders>true</RepeatRowHeaders>
+        <FixedRowHeaders>true</FixedRowHeaders>
+        <DataSetName>INV_RECEIPT_DATAH</DataSetName>
+        <Height>1.47917in</Height>
+        <Width>7.22918in</Width>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Tablix>
+    </ReportItems>
+    <Height>3.90525cm</Height>
+    <Style />
+  </Body>
+  <ReportParameters>
+    <ReportParameter Name="ReceiptCode">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CodeMess">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CompanyName">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="CompanyAddress">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="Title">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+  </ReportParameters>
+  <Width>18.44148cm</Width>
+  <Page>
+    <PageHeader>
+      <Height>5.67266cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Rectangle Name="rectangle2">
+          <ReportItems>
+            <Textbox Name="txtLRESITIKI">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Resi TIKI   :</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.65278in</Top>
+              <Left>4.10556in</Left>
+              <Height>0.175in</Height>
+              <Width>1in</Width>
+              <Style>
+                <Border />
+                <PaddingLeft>2pt</PaddingLeft>
+              </Style>
+            </Textbox>
+            <Textbox Name="txtLTANGGAL">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Tanggal   :</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.15in</Top>
+              <Left>4.10556in</Left>
+              <Height>0.175in</Height>
+              <Width>1in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border />
+                <PaddingLeft>2pt</PaddingLeft>
+              </Style>
+            </Textbox>
+            <Textbox Name="txtTANGGAL">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Fields!InvPreparedForDate.Value</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <Format>dd MMMM yyyy</Format>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.15in</Top>
+              <Left>5.175in</Left>
+              <Height>0.175in</Height>
+              <Width>2in</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Color>Gray</Color>
+                </Border>
+                <BottomBorder>
+                  <Style>None</Style>
+                </BottomBorder>
+                <PaddingLeft>1pt</PaddingLeft>
+              </Style>
+            </Textbox>
+            <Textbox Name="txtRESITIKI">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Fields!InvResiTiki.Value</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.65139in</Top>
+              <Left>5.175in</Left>
+              <Height>0.175in</Height>
+              <Width>2in</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border>
+                  <Color>Gray</Color>
+                </Border>
+                <BottomBorder>
+                  <Style>None</Style>
+                </BottomBorder>
+                <PaddingLeft>2pt</PaddingLeft>
+              </Style>
+            </Textbox>
+            <Textbox Name="txtCOMPANY">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Parameters!CompanyName.Value</Value>
+                      <Style>
+                        <FontSize>12pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.05in</Top>
+              <Left>0.925in</Left>
+              <Height>0.25in</Height>
+              <Width>3in</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <Border />
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="txtCOMPANYADDR">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Parameters!CompanyAddress.Value</Value>
+                      <Style>
+                        <FontSize>7pt</FontSize>
+                        <Format>dd/MM/yyyy</Format>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Left</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.3375in</Top>
+              <Left>0.925in</Left>
+              <Height>0.5in</Height>
+              <Width>3in</Width>
+              <ZIndex>5</ZIndex>
+              <Style>
+                <Border>
+                  <Color>Gray</Color>
+                </Border>
+                <PaddingLeft>2pt</PaddingLeft>
+              </Style>
+            </Textbox>
+            <Image Name="image1">
+              <Source>Embedded</Source>
+              <Value>logo_100bw</Value>
+              <MIMEType>image/jpeg</MIMEType>
+              <Sizing>FitProportional</Sizing>
+              <Top>0.05in</Top>
+              <Left>0.025in</Left>
+              <Height>0.76389in</Height>
+              <Width>0.83056in</Width>
+              <ZIndex>6</ZIndex>
+              <Style>
+                <Border />
+              </Style>
+            </Image>
+            <Textbox Name="txtLRECEIPTCODE">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Receipt Code   :</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Right</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.39583in</Top>
+              <Left>4.10556in</Left>
+              <Height>0.175in</Height>
+              <Width>1in</Width>
+              <ZIndex>7</ZIndex>
+              <Style>
+                <Border />
+                <PaddingLeft>2pt</PaddingLeft>
+              </Style>
+            </Textbox>
+            <Textbox Name="txtRECEIPTCODE">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Parameters!ReceiptCode.Value</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.39444in</Top>
+              <Left>5.175in</Left>
+              <Height>0.175in</Height>
+              <Width>2in</Width>
+              <ZIndex>8</ZIndex>
+              <Style>
+                <Border />
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="txtTITLE">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Parameters!Title.Value</Value>
+                      <Style>
+                        <FontSize>12pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>1.53854in</Top>
+              <Left>0.025in</Left>
+              <Height>0.25in</Height>
+              <Width>7.15in</Width>
+              <ZIndex>9</ZIndex>
+              <Style>
+                <Border />
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <KeepTogether>true</KeepTogether>
+          <DataElementOutput>ContentsOnly</DataElementOutput>
+          <Top>0.05in</Top>
+          <Left>0.03175cm</Left>
+          <Height>2.11389in</Height>
+          <Width>7.19583in</Width>
+          <Style />
+        </Rectangle>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageHeader>
+    <PageFooter>
+      <Height>4.26156cm</Height>
+      <PrintOnFirstPage>true</PrintOnFirstPage>
+      <PrintOnLastPage>true</PrintOnLastPage>
+      <ReportItems>
+        <Rectangle Name="rectangle1">
+          <ReportItems>
+            <Textbox Name="txtPREPAREDBY">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Fields!UserName.Value</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.90278in</Top>
+              <Left>4.61251in</Left>
+              <Height>0.18542in</Height>
+              <Width>1.75in</Width>
+              <Style>
+                <BottomBorder>
+                  <Style>Solid</Style>
+                </BottomBorder>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+              </Style>
+            </Textbox>
+            <Textbox Name="txtRECEIVEDBY">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Fields!InvMessName.Value</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.90278in</Top>
+              <Left>0.07708in</Left>
+              <Height>0.18542in</Height>
+              <Width>1.75in</Width>
+              <ZIndex>1</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <BottomBorder>
+                  <Style>Solid</Style>
+                </BottomBorder>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+              </Style>
+            </Textbox>
+            <Textbox Name="txtLPREPAREDBY">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Prepared By</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.15278in</Top>
+              <Left>4.78751in</Left>
+              <Height>0.2in</Height>
+              <Width>1.375in</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border />
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="txtLRECEIVEDBY">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>Received By</Value>
+                      <Style>
+                        <FontSize>8pt</FontSize>
+                        <FontWeight>Bold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <Top>0.15278in</Top>
+              <Left>0.25208in</Left>
+              <Height>0.2in</Height>
+              <Width>1.375in</Width>
+              <ZIndex>3</ZIndex>
+              <Style>
+                <Border />
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="textbox33">
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Now</Value>
+                      <Style>
+                        <FontStyle>Italic</FontStyle>
+                        <FontSize>6pt</FontSize>
+                        <Format>dd/MM/yyyy</Format>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>textbox33</rd:DefaultName>
+              <Top>1.44028in</Top>
+              <Left>4.61251in</Left>
+              <Height>0.15in</Height>
+              <Width>1.25in</Width>
+              <ZIndex>4</ZIndex>
+              <Style>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <DataElementOutput>ContentsOnly</DataElementOutput>
+          <Left>0.04233cm</Left>
+          <Height>1.62778in</Height>
+          <Width>7.19167in</Width>
+          <Style />
+        </Rectangle>
+      </ReportItems>
+      <Style>
+        <Border>
+          <Style>None</Style>
+        </Border>
+      </Style>
+    </PageFooter>
+    <PageHeight>29.7cm</PageHeight>
+    <PageWidth>21cm</PageWidth>
+    <LeftMargin>2.5cm</LeftMargin>
+    <RightMargin>2.5cm</RightMargin>
+    <TopMargin>2cm</TopMargin>
+    <BottomMargin>2cm</BottomMargin>
+    <ColumnSpacing>1.27cm</ColumnSpacing>
+    <Style />
+  </Page>
+  <EmbeddedImages>
+    <EmbeddedImage Name="logo_100bw">
+      <MIMEType>image/png</MIMEType>
+      <ImageData>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</ImageData>
+    </EmbeddedImage>
+  </EmbeddedImages>
+  <rd:ReportID>4d59c565-e9d2-407d-92a6-f261fc6bb5c1</rd:ReportID>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
+</Report>

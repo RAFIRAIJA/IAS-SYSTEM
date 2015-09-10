@@ -1,0 +1,125 @@
+<?xml version='1.0'?>
+<MsMenu>
+<MsMenuItem title='IAS APPLICATION' url='#' result='SM' menuid='00000' ><MsMenuItem title='Administration' url='#' result='SM' menuid='AD000' ><MsMenuItem title='Menu' url='../pj_ad/ad_menu.aspx' result='MN' menuid='AD001' ></MsMenuItem>
+<MsMenuItem title='GroupMenu' url='../pj_ad/ad_groupmenu.aspx' result='MN' menuid='AD004' ></MsMenuItem>
+<MsMenuItem title='System User' url='../pj_ad/ad_systemuser.aspx' result='MN' menuid='AD005' ></MsMenuItem>
+<MsMenuItem title='Ganti Password' url='../pj_ad/ad_updatepwd.aspx' result='MN' menuid='AD008' ></MsMenuItem>
+<MsMenuItem title='Change Menu Style' url='../pj_ad/ad_menustyle.aspx' result='MN' menuid='AD019' ></MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Account Payable' url='#' result='SM' menuid='AP000' ><MsMenuItem title='Master' url='#' result='SM' menuid='APM01' ><MsMenuItem title='AP MR Template' url='../pj_ap/ap_mr_template.aspx' result='MN' menuid='AP001' ></MsMenuItem>
+<MsMenuItem title='AP Vendor Zone' url='../pj_in/in_inv_addinfo_apdozone.aspx?mpFP=1' result='MN' menuid='AP006' ></MsMenuItem>
+<MsMenuItem title='IN Inventory Size' url='../pj_in/in_inv_addinfo_size.aspx?mpFP=1' result='MN' menuid='AP056' ></MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Posting' url='#' result='SM' menuid='APP01' ><MsMenuItem title='AP MR Posting 1 Review' url='../pj_ap/ap_post_mrbatch.aspx?mpFP=2' result='MN' menuid='AP003' ></MsMenuItem>
+<MsMenuItem title='AP MR Posting 2 Authorize' url='../pj_ap/ap_post_mrbatch.aspx?mpFP=3' result='MN' menuid='AP004' ></MsMenuItem>
+<MsMenuItem title='AP MR Posting to PO' url='../pj_ap/ap_post_mrbatch_appo.aspx?mpFP=1' result='MN' menuid='AP005' ></MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Report' url='#' result='SM' menuid='APR01' ><MsMenuItem title='AP MR Report1' url='../pj_ap/ap_rpt_mr_request.aspx?mpFP=1' result='MN' menuid='AP007' ></MsMenuItem>
+<MsMenuItem title='AP MR No Request Rpt' url='../pj_ap/ap_rpt_mr_sitenorequest.aspx?mpFP=1' result='MN' menuid='AP008' ></MsMenuItem>
+<MsMenuItem title='AP MR (Wait) Report' url='../pj_ap/ap_rpt_mr_request_wait.aspx' result='MN' menuid='AP009' ></MsMenuItem>
+<MsMenuItem title='AP Delivery Note (MR) Report' url='../pj_ap/ap_rpt_mr_do.aspx' result='MN' menuid='AP010' ></MsMenuItem>
+<MsMenuItem title='AP MR Document Report' url='../pj_ap/ap_rpt_mr_request_mr_cr.aspx' result='MN' menuid='AP015' ></MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Transaksi' url='#' result='SM' menuid='APT01' ><MsMenuItem title='AP MR Entry (ISS)' url='../pj_ap/ap_mr_entry.aspx?mpFP=1' result='MN' menuid='AP002' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IFS)' url='../pj_ap/ap_mr_entry.aspx?mpFP=2' result='MN' menuid='AP011' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IPM)' url='../pj_ap/ap_mr_entry.aspx?mpFP=3' result='MN' menuid='AP012' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ICS)' url='../pj_ap/ap_mr_entry.aspx?mpFP=4' result='MN' menuid='AP013' ></MsMenuItem>
+<MsMenuItem title='AP CAPEX (ISS)' url='../pj_ap/ap_capex_entry.aspx' result='MN' menuid='AP014' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ICS-BALI)' url='../pj_ap/ap_mr_entry.aspx?mpFP=4L1' result='MN' menuid='AP016' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ICS-BALIKPAPAN)' url='../pj_ap/ap_mr_entry.aspx?mpFP=4A1' result='MN' menuid='AP017' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ICS-BATAM)' url='../pj_ap/ap_mr_entry.aspx?mpFP=4T1' result='MN' menuid='AP018' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ICS-BDG)' url='../pj_ap/ap_mr_entry.aspx?mpFP=4B1' result='MN' menuid='AP019' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ICS-MAKASSAR)' url='../pj_ap/ap_mr_entry.aspx?mpFP=4K1' result='MN' menuid='AP020' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ICS-MEDAN)' url='../pj_ap/ap_mr_entry.aspx?mpFP=4D1' result='MN' menuid='AP021' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ICS-PALEMBANG)' url='../pj_ap/ap_mr_entry.aspx?mpFP=4P1' result='MN' menuid='AP022' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ICS-PEKANBARU)' url='../pj_ap/ap_mr_entry.aspx?mpFP=4N1' result='MN' menuid='AP023' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ICS-SEMARANG)' url='../pj_ap/ap_mr_entry.aspx?mpFP=4M1' result='MN' menuid='AP024' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ICS-SURABAYA)' url='../pj_ap/ap_mr_entry.aspx?mpFP=4Y1' result='MN' menuid='AP025' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IFS-BALI)' url='../pj_ap/ap_mr_entry.aspx?mpFP=2L1' result='MN' menuid='AP026' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IFS-BALIKPAPAN)' url='../pj_ap/ap_mr_entry.aspx?mpFP=2A1' result='MN' menuid='AP027' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IFS-BATAM)' url='../pj_ap/ap_mr_entry.aspx?mpFP=2T1' result='MN' menuid='AP028' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IFS-BDG)' url='../pj_ap/ap_mr_entry.aspx?mpFP=2B1' result='MN' menuid='AP029' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IFS-MAKASSAR)' url='../pj_ap/ap_mr_entry.aspx?mpFP=2K1' result='MN' menuid='AP030' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IFS-MEDAN)' url='../pj_ap/ap_mr_entry.aspx?mpFP=2D1' result='MN' menuid='AP031' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IFS-PALEMBANG)' url='../pj_ap/ap_mr_entry.aspx?mpFP=2P1' result='MN' menuid='AP032' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IFS-PEKANBARU)' url='../pj_ap/ap_mr_entry.aspx?mpFP=2N1' result='MN' menuid='AP033' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IFS-SEMARANG)' url='../pj_ap/ap_mr_entry.aspx?mpFP=2M1' result='MN' menuid='AP034' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IFS-SURABAYA)' url='../pj_ap/ap_mr_entry.aspx?mpFP=2Y1' result='MN' menuid='AP035' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IPM-BALI)' url='../pj_ap/ap_mr_entry.aspx?mpFP=3L1' result='MN' menuid='AP036' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IPM-BALIKPAPAN)' url='../pj_ap/ap_mr_entry.aspx?mpFP=3A1' result='MN' menuid='AP037' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IPM-BATAM)' url='../pj_ap/ap_mr_entry.aspx?mpFP=3T1' result='MN' menuid='AP038' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IPM-BDG)' url='../pj_ap/ap_mr_entry.aspx?mpFP=3B1' result='MN' menuid='AP039' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IPM-MAKASSAR)' url='../pj_ap/ap_mr_entry.aspx?mpFP=3K1' result='MN' menuid='AP040' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IPM-MEDAN)' url='../pj_ap/ap_mr_entry.aspx?mpFP=3D1' result='MN' menuid='AP041' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IPM-PALEMBANG)' url='../pj_ap/ap_mr_entry.aspx?mpFP=3P1' result='MN' menuid='AP042' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IPM-PEKANBARU)' url='../pj_ap/ap_mr_entry.aspx?mpFP=3N1' result='MN' menuid='AP043' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IPM-SEMARANG)' url='../pj_ap/ap_mr_entry.aspx?mpFP=3M1' result='MN' menuid='AP044' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (IPM-SURABAYA)' url='../pj_ap/ap_mr_entry.aspx?mpFP=3Y1' result='MN' menuid='AP045' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ISS-BALI)' url='../pj_ap/ap_mr_entry.aspx?mpFP=1L1' result='MN' menuid='AP046' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ISS-BALIKPAPAN)' url='../pj_ap/ap_mr_entry.aspx?mpFP=1A1' result='MN' menuid='AP047' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ISS-BATAM)' url='../pj_ap/ap_mr_entry.aspx?mpFP=1T1' result='MN' menuid='AP048' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ISS-BDG)' url='../pj_ap/ap_mr_entry.aspx?mpFP=1B1' result='MN' menuid='AP049' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ISS-MAKASSAR)' url='../pj_ap/ap_mr_entry.aspx?mpFP=1K1' result='MN' menuid='AP050' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ISS-MEDAN)' url='../pj_ap/ap_mr_entry.aspx?mpFP=1D1' result='MN' menuid='AP051' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ISS-PALEMBANG)' url='../pj_ap/ap_mr_entry.aspx?mpFP=1P1' result='MN' menuid='AP052' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ISS-PEKANBARU)' url='../pj_ap/ap_mr_entry.aspx?mpFP=1N1' result='MN' menuid='AP053' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ISS-SEMARANG)' url='../pj_ap/ap_mr_entry.aspx?mpFP=1M1' result='MN' menuid='AP054' ></MsMenuItem>
+<MsMenuItem title='AP MR Entry (ISS-SURABAYA)' url='../pj_ap/ap_mr_entry.aspx?mpFP=1Y1' result='MN' menuid='AP055' ></MsMenuItem>
+</MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Account Receivable' url='#' result='SM' menuid='AR000' ><MsMenuItem title='Master' url='#' result='SM' menuid='APM02' ><MsMenuItem title='AR INV-Messanger' url='../pj_ar/ar_Messanger.aspx' result='MN' menuid='AR003' ></MsMenuItem>
+<MsMenuItem title='AR INV-Type Document lampiran' url='../pj_ar/ar_typedoc_lampiran.aspx' result='MN' menuid='AR004' ></MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Posting' url='#' result='SM' menuid='APP02' ></MsMenuItem>
+<MsMenuItem title='Report' url='#' result='SM' menuid='APR02' ><MsMenuItem title='AR INV-Monitoring' url='../pj_ar/ar_monitoring.aspx' result='MN' menuid='AR005' ></MsMenuItem>
+<MsMenuItem title='AR INV-Monitoring Messanger' url='../pj_ar/ar_monitoringmessanger.aspx' result='MN' menuid='AR006' ></MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Transaksi' url='#' result='SM' menuid='APT02' ><MsMenuItem title='AR INV-Invoice Delivery' url='../pj_ar/ar_invoicedelivery.aspx' result='MN' menuid='AR001' ></MsMenuItem>
+<MsMenuItem title='AR INV-Upload Worksheet' url='../pj_ar/ar_UploadWorksheet.aspx' result='MN' menuid='AR002' ></MsMenuItem>
+</MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Contract' url='#' result='SM' menuid='CT000' ><MsMenuItem title='Master' url='#' result='SM' menuid='APM03' ></MsMenuItem>
+<MsMenuItem title='Posting' url='#' result='SM' menuid='APP03' ></MsMenuItem>
+<MsMenuItem title='Report' url='#' result='SM' menuid='APR03' ><MsMenuItem title='CT Contract Due Date (Nav)' url='../pj_ct2/ct_rpt_ctduedate.aspx' result='MN' menuid='CT001' ></MsMenuItem>
+<MsMenuItem title='CT Rpt Contract' url='../pj_ct/ct_rpt_contract.aspx' result='MN' menuid='CT006' ></MsMenuItem>
+<MsMenuItem title='CT Rpt Contract Track (Tree)' url='../pj_ct/ct_treedowntxpress.aspx' result='MN' menuid='CT007' ></MsMenuItem>
+<MsMenuItem title='CT Rpt Contract Track' url='../pj_ct/ct_rpt_contract_track.aspx?mpFP=1' result='MN' menuid='CT009' ></MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Transaksi' url='#' result='SM' menuid='APT03' ><MsMenuItem title='CT Create Contract (N)' url='../pj_ct/ct_ctentry.aspx?mpFP=1' result='MN' menuid='CT002' ></MsMenuItem>
+<MsMenuItem title='CT Extend Contract (R)' url='../pj_ct/ct_ctentry.aspx?mpFP=2' result='MN' menuid='CT003' ></MsMenuItem>
+<MsMenuItem title='CT Extend Contract (M)' url='../pj_ct/ct_ctentry.aspx?mpFP=3' result='MN' menuid='CT004' ></MsMenuItem>
+<MsMenuItem title='CT Transfer Task' url='../pj_ct/ct_transfer_task.aspx' result='MN' menuid='CT005' ></MsMenuItem>
+<MsMenuItem title='CT Contract Letter' url='../pj_ct/ct_ctentry.aspx?mpFP=4' result='MN' menuid='CT008' ></MsMenuItem>
+<MsMenuItem title='CT Terminated Contract' url='../pj_ct/ct_ctentry.aspx?mpFP=5' result='MN' menuid='CT010' ></MsMenuItem>
+</MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='File System' url='#' result='SM' menuid='FS000' ><MsMenuItem title='Master' url='#' result='SM' menuid='APM08' ></MsMenuItem>
+<MsMenuItem title='Posting' url='#' result='SM' menuid='APP08' ></MsMenuItem>
+<MsMenuItem title='Report' url='#' result='SM' menuid='APR08' ></MsMenuItem>
+<MsMenuItem title='Transaction' url='#' result='SM' menuid='APT08' ><MsMenuItem title='FS File Download' url='../pj_fs/fs_file_download.aspx' result='MN' menuid='FS001' ></MsMenuItem>
+<MsMenuItem title='FS File Upload' url='../pj_fs/fs_file_upload.aspx' result='MN' menuid='FS002' ></MsMenuItem>
+</MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Human Resource' url='#' result='SM' menuid='HR000' ><MsMenuItem title='Master' url='#' result='SM' menuid='APM04' ><MsMenuItem title='HR Sunfish Frontliner' url='../pj_hr/hr_script_mr_frontliner.aspx?mpFP=1' result='MN' menuid='HR001' ></MsMenuItem>
+<MsMenuItem title='HR Sunfish Employee' url='../pj_hr/hr_script_hr_nik.aspx' result='MN' menuid='HR002' ></MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Posting' url='#' result='SM' menuid='APP04' ></MsMenuItem>
+<MsMenuItem title='Report' url='#' result='SM' menuid='APR04' ><MsMenuItem title='HR Rpt Allowance' url='../pj_hr/report/hr_allowance_report.aspx' result='MN' menuid='HR004' ></MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Transaksi' url='#' result='SM' menuid='APT04' ><MsMenuItem title='HR Allowance' url='../pj_hr/hr_allowance.aspx' result='MN' menuid='HR003' ></MsMenuItem>
+</MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Inventory' url='#' result='SM' menuid='IN000' ><MsMenuItem title='Master' url='#' result='SM' menuid='APM05' ><MsMenuItem title='Inventory Image' url='../pj_in/in_inv_image.aspx' result='MN' menuid='IN001' ></MsMenuItem>
+</MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Operasional' url='#' result='SM' menuid='OP000' ><MsMenuItem title='Master' url='#' result='SM' menuid='APM07' ><MsMenuItem title='OP UserSiteCard' url='../pj_op/op_user_sitecard.aspx?mpFP=1' result='MN' menuid='OP001' ></MsMenuItem>
+</MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Utility' url='#' result='SM' menuid='UT000' ><MsMenuItem title='Master' url='#' result='SM' menuid='APM09' ><MsMenuItem title='Data Address Book (Ship)' url='../pj_xm/xm_masteraddress.aspx?mpFP=ARSHIP' result='MN' menuid='UT001' ></MsMenuItem>
+</MsMenuItem>
+<MsMenuItem title='Posting' url='#' result='SM' menuid='APP09' ></MsMenuItem>
+<MsMenuItem title='Report' url='#' result='SM' menuid='APR09' ></MsMenuItem>
+<MsMenuItem title='Transaction' url='#' result='SM' menuid='APT09' ></MsMenuItem>
+</MsMenuItem>
+</MsMenuItem>
+</MsMenu>

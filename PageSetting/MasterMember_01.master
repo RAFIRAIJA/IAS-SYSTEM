@@ -1,0 +1,54 @@
+<%@ Master Language="VB" CodeFile="MasterMember_01.master.vb" Inherits="MasterMember_01" %>
+<%@ Register TagPrefix="menubottom" TagName="menubottom" src="menubottom.ascx" %>
+<%@ Register TagPrefix="menutop" TagName="menutop" src="menutop.ascx" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../script/style.css" />        
+</head>
+
+<body>
+    <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+        <td align="center" colspan="2"><menutop:menutop runat="server" ID="menutop" /> </td>
+    </tr>
+    
+    <tr>
+    <td width="20%" valign="top">              
+        
+        
+        <asp:Panel ID="pnMENU" runat="server">   
+            
+            <asp:DataGrid runat="server" ID="mlMENUGRID"             
+            BorderWidth = "0"
+            BorderColor="white"
+            autogeneratecolumns="false">
+                	
+        	<AlternatingItemStyle BackColor="#F4EEFE" />
+            <Columns>      
+                <asp:HyperLinkColumn DataTextField = "Description" DataNavigateUrlField ="ExecFile"></asp:HyperLinkColumn>
+            </Columns>
+         </asp:DataGrid>  
+        </asp:Panel>    
+    </td>
+    
+    <td width="80%" valign="top">        
+        <asp:contentplaceholder id="mpCONTENT" runat="server">
+        </asp:contentplaceholder>
+    </td>
+    </tr>
+        
+    <tr>
+    <td colspan="2" align="center" valign="top">        
+        <br />
+        <menubottom:menubottom runat="server" ID="menubottomsidebar" />        				
+    </td>
+    </tr>
+    </table>
+
+    
+</body>
+</html>

@@ -1,0 +1,60 @@
+<%@ Master Language="VB" CodeFile="MasterIntern_01.master.vb" Inherits="MasterIntern_01" %>
+<%@ Register TagPrefix="menubottom" TagName="menubottom" src="menubottom.ascx" %>
+<%@ Register TagPrefix="menutop" TagName="menutop" src="menutop.ascx" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="../script/style.css" />   
+</head>
+
+<body>
+    <div id="content">
+    <div id="header">
+    </div>
+    
+    <div class="sidemenu">
+        <div class="arrowlistmenu">  
+            
+            <asp:Panel ID="pnMENU" runat="server">              
+                
+                <asp:DataGrid runat="server" ID="mlMENUGRID" BorderWidth = "0" BorderColor="white" autogeneratecolumns="false" GridLines="None">                	
+        	    <AlternatingItemStyle BackColor="#f7fbdf" />
+                <Columns>                      
+                    <asp:HyperLinkColumn DataTextField = "Description" DataNavigateUrlField ="ExecFile" DataNavigateUrlFormatString="{0}"></asp:HyperLinkColumn>                                                
+                </Columns>           
+                </asp:DataGrid>  
+             
+            </asp:Panel>    
+        </div>
+        
+        <div style="padding-top:10px;">        
+        <img src="../images/background/contact.png">
+        </div>
+        
+        <%  If Session("mgUSERID") <> "" Then %>
+        <img src="../images/system/logintext.gif" alt="" />
+        <%                
+            Response.Write("<font size=1px>" & _
+            " Login ID : " & Session("mgUSERID") & "- " & Session("mgNAME") & "," & _
+            " Current Time : " & Now() & _
+            " </font>")
+            End If
+            
+         %>      
+    </div>
+    
+    <div id="contentpage">        
+        <asp:contentplaceholder id="mpCONTENT" runat="server">
+        </asp:contentplaceholder>       
+    </div>
+        
+    <div>               
+        <menubottom:menubottom runat="server" ID="menubottomsidebar" />        				
+    </div>
+    
+    </div>    
+</body>
+</html>
